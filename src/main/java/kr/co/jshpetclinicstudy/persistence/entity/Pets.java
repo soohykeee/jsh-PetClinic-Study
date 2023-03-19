@@ -24,7 +24,6 @@ public class Pets {
     private LocalDateTime birth_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(name = "owner_id")
     private Owners owners;
 
     @Enumerated(EnumType.STRING)
