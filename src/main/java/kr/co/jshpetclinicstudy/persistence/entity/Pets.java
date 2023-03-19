@@ -27,7 +27,6 @@ public class Pets {
     private Owners owners;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="type_id")
     private Types types;
 
     @Builder
