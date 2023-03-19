@@ -25,7 +25,9 @@ public class Visits {
     @ManyToOne(fetch = FetchType.LAZY)
     private Pets pets;
 
-    public Visits(LocalDateTime visitDate, String description, Pets pets) {
+    public Visits(LocalDateTime visitDate,
+                  String description,
+                  Pets pets) {
         this.visitDate = visitDate;
         this.description = description;
         this.pets = pets;
