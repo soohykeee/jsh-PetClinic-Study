@@ -8,14 +8,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "pets_id", length = 4))
 @NoArgsConstructor
 @Getter
-public class Pets {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "pets_id", length = 4)
-    private Long petsId;
+public class Pets extends BaseEntity{
 
     @Column(name = "name", length = 30)
     private String name;

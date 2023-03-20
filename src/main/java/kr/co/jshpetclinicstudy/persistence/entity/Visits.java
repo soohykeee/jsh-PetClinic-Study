@@ -7,14 +7,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "visits_id", length = 4))
 @Getter
 @NoArgsConstructor
-public class Visits {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "visits_id", length = 4)
-    private Long visitsId;
+public class Visits extends BaseEntity{
 
     @Column(name = "visit_date")
     private LocalDateTime visitDate;

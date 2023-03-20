@@ -6,14 +6,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "owners_id", length = 4))
 @Getter
 @NoArgsConstructor
-public class Owners {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "owners_id", length = 4)
-    private Long ownersId;
+public class Owners extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
     private String firstName;

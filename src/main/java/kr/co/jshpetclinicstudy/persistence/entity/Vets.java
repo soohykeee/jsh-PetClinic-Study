@@ -5,14 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
+@AttributeOverride(name = "id", column = @Column(name = "vets_id", length = 4))
 @Getter
 @NoArgsConstructor
-public class Vets {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vets_id", length = 4)
-    private Long vetsId;
+public class Vets extends BaseEntity{
 
     @Column(name = "first_name", length = 30)
     private String firstName;
