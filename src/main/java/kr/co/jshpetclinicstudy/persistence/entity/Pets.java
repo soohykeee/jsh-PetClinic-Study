@@ -27,6 +27,7 @@ public class Pets {
     private Owners owners;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="pets_types")
     private Types types;
 
     @Builder
