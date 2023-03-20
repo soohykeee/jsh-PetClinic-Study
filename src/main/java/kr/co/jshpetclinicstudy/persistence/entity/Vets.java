@@ -21,6 +21,7 @@ public class Vets {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
+    @Column(name="vets_specialties")
     private Specialties specialties;
 
     public Vets(String firstName,
