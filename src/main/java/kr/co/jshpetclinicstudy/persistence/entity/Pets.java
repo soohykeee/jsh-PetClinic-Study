@@ -20,6 +20,7 @@ public class Pets extends BaseEntity{
     private LocalDateTime birth_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owners_id")
     private Owners owners;
 
     @Enumerated(EnumType.STRING)

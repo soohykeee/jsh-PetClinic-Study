@@ -19,6 +19,7 @@ public class Visits extends BaseEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pets_id")
     private Pets pets;
 
     public Visits(LocalDateTime visitDate,
