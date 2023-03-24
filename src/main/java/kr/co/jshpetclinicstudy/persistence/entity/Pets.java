@@ -5,19 +5,20 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "pets_id", length = 4))
+@AttributeOverride(name = "id", column = @Column(name = "pet_id", length = 4))
 @NoArgsConstructor
 @Getter
+@Table(name="tbl_pets")
 public class Pets extends BaseEntity{
 
     @Column(name = "name", length = 30)
     private String name;
 
     @Column(name = "birth_date")
-    private LocalDateTime birth_date;
+    private LocalDate birth_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owners_id")
@@ -29,7 +30,8 @@ public class Pets extends BaseEntity{
 
     @Builder
     public Pets(String name,
-                LocalDateTime birth_date,
+                LocalDate
+                        birth_date,
                 Owners owners,
                 Types types) {
         this.name = name;
