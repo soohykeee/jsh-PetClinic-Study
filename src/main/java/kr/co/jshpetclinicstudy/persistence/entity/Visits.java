@@ -4,16 +4,17 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "visits_id", length = 4))
+@AttributeOverride(name = "id", column = @Column(name = "visit_id", length = 4))
 @Getter
 @NoArgsConstructor
+@Table(name="tbl_visits")
 public class Visits extends BaseEntity{
 
     @Column(name = "visit_date")
-    private LocalDateTime visitDate;
+    private LocalDate visitDate;
 
     @Column(name = "description")
     private String description;
@@ -22,7 +23,7 @@ public class Visits extends BaseEntity{
     @JoinColumn(name = "pets_id")
     private Pets pets;
 
-    public Visits(LocalDateTime visitDate,
+    public Visits(LocalDate visitDate,
                   String description,
                   Pets pets) {
         this.visitDate = visitDate;

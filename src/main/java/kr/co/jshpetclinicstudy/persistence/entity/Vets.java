@@ -5,9 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@AttributeOverride(name = "id", column = @Column(name = "vets_id", length = 4))
+@AttributeOverride(name = "id", column = @Column(name = "vet_id", length = 4))
 @Getter
 @NoArgsConstructor
+@Table(name="tbl_vets")
 public class Vets extends BaseEntity{
 
     @Column(name = "first_name", length = 30)
