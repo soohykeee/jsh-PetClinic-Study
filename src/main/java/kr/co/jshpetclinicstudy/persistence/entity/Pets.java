@@ -30,8 +30,7 @@ public class Pets extends BaseEntity{
 
     @Builder
     public Pets(String name,
-                LocalDate
-                        birth_date,
+                LocalDate birth_date,
                 Owners owners,
                 Types types) {
         this.name = name;
