@@ -10,9 +10,9 @@ import java.util.Optional;
 @Repository
 public interface OwnersRepository extends JpaRepository<Owners, Long> {
 
-    @Query("select Owners.id " +
-            "from Owners " +
-            "where Owners.telephone=: teleephone")
+    @Query(value = "select o.owner_id, o.address, o.city, o.first_name, o.last_name, o.telephone " +
+            "from tbl_owners o " +
+            "where o.telephone=:telephone", nativeQuery = true)
     Optional<Owners> findOwnerByTelephone(String telephone);
 
 }
