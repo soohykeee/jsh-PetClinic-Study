@@ -1,15 +1,20 @@
 package kr.co.jshpetclinicstudy.service;
 
-import kr.co.jshpetclinicstudy.persistence.dto.PetsDto;
+import kr.co.jshpetclinicstudy.persistence.entity.Owners;
+import kr.co.jshpetclinicstudy.persistence.entity.Pets;
+import kr.co.jshpetclinicstudy.persistence.repository.OwnersRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetsRepository;
-import org.assertj.core.api.Assertions;
+import kr.co.jshpetclinicstudy.service.model.dtos.PetsRequestDto;
+import kr.co.jshpetclinicstudy.service.model.dtos.PetsResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class PetsServiceTest {
@@ -18,37 +23,65 @@ class PetsServiceTest {
     private PetsService petsService;
     @Autowired
     private PetsRepository petsRepository;
+    @Autowired
+    private OwnersRepository ownersRepository;
 
     @Test
-    void createPets() {
-        PetsDto dto = PetsDto.builder()
+    void createPet() {
+        Optional<Owners> owners = ownersRepository.findOwnerByTelephone("01064564655");
+
+        PetsRequestDto.CREATE create = PetsRequestDto.CREATE.builder()
                 .name("멍멍이")
-                .birthDate(LocalDate.ofYearDay(2022, 1))
-                .ownerFirstName("수혁")
-                .ownerTelephone("01064564655")
+                .birthDate(LocalDate.of(2021, 1, 9))
+                .owners(owners.get())
                 .type("푸들")
                 .build();
 
-        petsService.createPets(dto);
+        petsService.createPet(create);
+        Optional<Pets> pets = petsRepository.findById(1L);
+        assertThat(pets.get().getName()).isEqualTo("멍멍이");
     }
 
     @Test
-    void getPets() {
-        PetsDto petsDto = petsService.getPets(1L);
+    void getPetList() {
+        List<PetsResponseDto.READ> readList = petsService.getPetList();
 
-        Assertions.assertThat(petsDto.getName()).isEqualTo("멍멍이");
+        assertThat(readList.get(0).getName()).isEqualTo("멍멍이");
+        assertThat(petsRepository.findAll().size()).isEqualTo(readList.size());
     }
 
     @Test
-    void updatePets() {
-
+    void getPet() {
+        PetsResponseDto.DETAIL_READ detailRead = petsService.getPet(2L);
+        assertThat(detailRead.getName()).isEqualTo("뭉이");
+        assertThat(detailRead.getOwnerFirstName()).isEqualTo("수혁");
     }
 
     @Test
-    void deletePets() {
-        petsService.deletePets(1L);
+    void getPetListOfOwner() {
+        List<PetsResponseDto.READ> petListOfOwner = petsService.getPetListOfOwner(1L);
 
-        Assertions.assertThat(petsRepository.findById(1L).isEmpty()).isTrue();
+        assertThat(petListOfOwner.get(2).getName()).isEqualTo("초코");
+        assertThat(petListOfOwner.size()).isEqualTo(3);
+    }
+
+    @Test
+    void updatePet() {
+        PetsRequestDto.UPDATE update = PetsRequestDto.UPDATE.builder()
+                .petId(3L)
+                .name("딸기")
+                .birthDate(LocalDate.of(2011, 01, 01))
+                .type("포메라니안")
+                .build();
+
+        petsService.updatePet(update);
+        assertThat(petsRepository.findById(3L).get().getName()).isEqualTo("딸기");
+    }
+
+    @Test
+    void deletePet() {
+        petsService.deletePet(3L);
+        assertThat(petsRepository.findById(3L)).isEmpty();
     }
 
 }

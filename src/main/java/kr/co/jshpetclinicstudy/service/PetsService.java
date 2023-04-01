@@ -1,79 +1,67 @@
 package kr.co.jshpetclinicstudy.service;
 
 import jakarta.transaction.Transactional;
-import kr.co.jshpetclinicstudy.persistence.dto.PetsDto;
-import kr.co.jshpetclinicstudy.persistence.entity.Owners;
 import kr.co.jshpetclinicstudy.persistence.entity.Pets;
 import kr.co.jshpetclinicstudy.persistence.entity.Types;
-import kr.co.jshpetclinicstudy.persistence.repository.OwnersRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetsRepository;
+import kr.co.jshpetclinicstudy.service.model.dtos.PetsRequestDto;
+import kr.co.jshpetclinicstudy.service.model.dtos.PetsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class PetsService {
 
     private final PetsRepository petsRepository;
-    private final OwnersRepository ownersRepository;
 
-    private Pets dtoToEntity(PetsDto dto) {
-        Optional<Owners> owners = ownersRepository.findOwnerByTelephone(dto.getOwnerTelephone());
-
-        Pets pets = Pets.builder()
-                .name(dto.getName())
-                .birthDate(dto.getBirthDate())
-                .owners(owners.get())
-                .types(Types.valueOf(dto.getType()))
-                .build();
-
-        return pets;
-    }
-
-    private PetsDto entityToDto(Pets pets) {
-        PetsDto dto = PetsDto.builder()
-                .petId(pets.getId())
-                .name(pets.getName())
-                .birthDate(pets.getBirthDate())
-                .ownerFirstName(pets.getOwners().getFirstName())
-                .ownerTelephone(pets.getOwners().getTelephone())
-                .type(pets.getTypes().toString())
-                .build();
-
-        return dto;
-    }
-
-    public void createPets(PetsDto dto) {
-        Pets pets = dtoToEntity(dto);
-
+    public void createPet(PetsRequestDto.CREATE create) {
+        final Pets pets = Pets.dtoToEntity(create);
         petsRepository.save(pets);
     }
 
     @Transactional
-    public PetsDto getPets(Long id) {
-        Optional<Pets> result = petsRepository.findById(id);
-
-        return entityToDto(result.get());
+    public List<PetsResponseDto.READ> getPetList() {
+        return petsRepository.findAll().stream()
+                .map(Pets::entityToDto).collect(Collectors.toList());
     }
 
-    public void modifyPets(PetsDto dto) {
-        Optional<Pets> pets = petsRepository.findById(dto.getPetId());
+    @Transactional
+    public PetsResponseDto.DETAIL_READ getPet(Long id) {
+        return Pets.entityToDetailDto(petsRepository.findById(id).get());
+    }
 
-        if (pets.isPresent()) {
-//            pets.changeName(dto.getName());
-//            pets.changebirthDate(dto.getBirthDate());
-//            pets.changeTypes(dto.getType().toString());
-            petsRepository.save(pets.get());
+    @Transactional
+    public List<PetsResponseDto.READ> getPetListOfOwner(Long ownerId) {
+        return petsRepository.findPetListByOwnerId(ownerId).stream()
+                .map(Pets::entityToDto).collect(Collectors.toList());
+    }
+
+    public void updatePet(PetsRequestDto.UPDATE update) {
+        final Optional<Pets> pets = petsRepository.findById(update.getPetId());
+        isPets(pets);
+
+        pets.get().changePetName(update.getName());
+        pets.get().changePetBirtDate(update.getBirthDate());
+        pets.get().changePetType(Types.valueOf(update.getType()));
+
+        petsRepository.save(pets.get());
+    }
+
+    public void deletePet(Long id) {
+        final Optional<Pets> pets = petsRepository.findById(id);
+        isPets(pets);
+        petsRepository.deleteById(id);
+    }
+
+    private void isPets(Optional<Pets> pets) {
+        if (pets.isEmpty()) {
+            throw new RuntimeException("This Pet is Not Exist");
         }
     }
 
-    public void deletePets(Long id) {
-        Optional<Pets> pets = petsRepository.findById(id);
-
-        if (pets.isPresent()) {
-            petsRepository.deleteById(id);
-        }
-    }
 }
