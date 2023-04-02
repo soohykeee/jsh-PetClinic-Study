@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -20,9 +21,10 @@ public class Visits extends BaseEntity{
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pets_id")
+    @JoinColumn(name = "pet_id")
     private Pets pets;
 
+    @Builder
     public Visits(LocalDate visitDate,
                   String description,
                   Pets pets) {
