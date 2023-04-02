@@ -1,6 +1,8 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.jshpetclinicstudy.service.model.SpecialtiesRequestDto;
+import kr.co.jshpetclinicstudy.service.model.SpecialtiesResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,11 +21,38 @@ public class Specialties extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "specialties")
-    private List<VetsSpecialties> specialties = new ArrayList<>();
+    private List<VetsSpecialties> vets = new ArrayList<>();
 
+    @Builder
     public Specialties(String name,
-                       List<VetsSpecialties> specialties) {
+                       List<VetsSpecialties> vets) {
         this.name = name;
-        this.specialties = specialties;
+        this.vets = vets;
+    }
+
+    public static Specialties dtoToEntity(SpecialtiesRequestDto.CREATE create) {
+        return Specialties.builder()
+                .name(create.getName())
+                .build();
+    }
+
+    public static SpecialtiesResponseDto.READ entityToDto(Specialties specialties) {
+        return SpecialtiesResponseDto.READ.builder()
+                .specialtyId(specialties.getId())
+                .name(specialties.getName())
+                .vets(specialties.getVets())
+                .build();
+    }
+
+    public static SpecialtiesResponseDto.DETAIL_READ entityToDetailDto(Specialties specialties) {
+        return SpecialtiesResponseDto.DETAIL_READ.builder()
+                .specialtyId(specialties.getId())
+                .name(specialties.getName())
+                .vets(specialties.getVets())
+                .build();
+    }
+
+    public void changeSpecialtyName(String changeName) {
+        this.name = changeName;
     }
 }
