@@ -28,7 +28,6 @@ public class OwnersService {
 
     private OwnersDto entityToDto(Owners owners) {
         OwnersDto dto = OwnersDto.builder()
-                .ownerId(owners.getId())
                 .firstName(owners.getFirstName())
                 .lastName(owners.getLastName())
                 .address(owners.getAddress())
