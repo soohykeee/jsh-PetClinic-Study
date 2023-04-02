@@ -18,7 +18,7 @@ public class Pets extends BaseEntity{
     private String name;
 
     @Column(name = "birth_date")
-    private LocalDate birthDate;
+    private LocalDate birth_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owners_id")
@@ -30,11 +30,11 @@ public class Pets extends BaseEntity{
 
     @Builder
     public Pets(String name,
-                LocalDate birthDate,
+                LocalDate birth_date,
                 Owners owners,
                 Types types) {
         this.name = name;
-        this.birthDate = birthDate;
+        this.birth_date = birth_date;
         this.owners = owners;
         this.types = types;
     }
