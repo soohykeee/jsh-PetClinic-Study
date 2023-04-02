@@ -24,7 +24,7 @@ public class Owners extends BaseEntity {
     @Column(name = "city", length = 80)
     private String city;
 
-    @Column(name = "telephone", length = 20, unique = true)
+    @Column(name = "telephone", length = 20)
     private String telephone;
 
     @Builder
