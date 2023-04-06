@@ -1,6 +1,8 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import kr.co.jshpetclinicstudy.service.model.OwnersRequestDto;
+import kr.co.jshpetclinicstudy.service.model.OwnersResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,5 +40,58 @@ public class Owners extends BaseEntity {
         this.address = address;
         this.city = city;
         this.telephone = telephone;
+    }
+
+
+    public static Owners dtoToEntity(OwnersRequestDto.CREATE create){
+        return Owners.builder()
+                .firstName(create.getFirstName())
+                .lastName(create.getLastName())
+                .address(create.getAddress())
+                .city(create.getCity())
+                .telephone(create.getTelephone())
+                .build();
+    }
+
+    public static OwnersResponseDto.READ entityToDto(Owners owners){
+        return OwnersResponseDto.READ.builder()
+                .ownerId(owners.getId())
+                .firstName(owners.getFirstName())
+                .lastName(owners.getLastName())
+                .address(owners.getAddress())
+                .city(owners.getCity())
+                .telephone(owners.getTelephone())
+                .build();
+    }
+
+    public static OwnersResponseDto.DETAIL_READ entityToDetailDto(Owners owners){
+        return OwnersResponseDto.DETAIL_READ.builder()
+                .ownerId(owners.getId())
+                .firstName(owners.getFirstName())
+                .lastName(owners.getLastName())
+                .address(owners.getAddress())
+                .city(owners.getCity())
+                .telephone(owners.getTelephone())
+                .build();
+    }
+
+    public void changeOwnerAddress(String changeAddress) {
+        this.address = changeAddress;
+    }
+
+    public void changeOwnerCity(String changeCity) {
+        this.city = changeCity;
+    }
+
+    public void changeOwnerFirstName(String changeFirstName) {
+        this.firstName = changeFirstName;
+    }
+
+    public void changeOwnerLastName(String changeLastName) {
+        this.lastName = changeLastName;
+    }
+
+    public void changeOwnerTelephone(String changeOwnerTelephone) {
+        this.telephone = changeOwnerTelephone;
     }
 }
