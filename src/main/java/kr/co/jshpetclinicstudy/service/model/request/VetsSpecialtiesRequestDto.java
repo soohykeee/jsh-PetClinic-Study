@@ -1,4 +1,4 @@
-package kr.co.jshpetclinicstudy.service.model;
+package kr.co.jshpetclinicstudy.service.model.request;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Specialties;
 import kr.co.jshpetclinicstudy.persistence.entity.Vets;

@@ -2,8 +2,8 @@ package kr.co.jshpetclinicstudy.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Specialties;
 import kr.co.jshpetclinicstudy.persistence.repository.SpecialtiesRepository;
-import kr.co.jshpetclinicstudy.service.model.SpecialtiesRequestDto;
-import kr.co.jshpetclinicstudy.service.model.SpecialtiesResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.SpecialtiesRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.SpecialtiesResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

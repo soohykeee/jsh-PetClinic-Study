@@ -1,14 +1,11 @@
-package kr.co.jshpetclinicstudy.service.model;
+package kr.co.jshpetclinicstudy.service.model.request;
 
-import kr.co.jshpetclinicstudy.persistence.entity.Owners;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-
-public class PetsRequestDto {
+public class SpecialtiesRequestDto {
 
     @Getter
     @Builder
@@ -18,11 +15,6 @@ public class PetsRequestDto {
 
         private String name;
 
-        private LocalDate birthDate;
-
-        private Owners owners;
-
-        private String type;
     }
 
     @Getter
@@ -31,14 +23,10 @@ public class PetsRequestDto {
     @NoArgsConstructor
     public static class UPDATE {
 
-        private Long petId;
+        private Long specialtyId;
 
         private String name;
 
-        private LocalDate birthDate;
-
-        private Owners owners;
-
-        private String type;
     }
+
 }

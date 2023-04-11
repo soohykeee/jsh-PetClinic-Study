@@ -1,46 +1,44 @@
-package kr.co.jshpetclinicstudy.service.model;
+package kr.co.jshpetclinicstudy.service.model.response;
 
+import kr.co.jshpetclinicstudy.persistence.entity.VetsSpecialties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class OwnersResponseDto {
+import java.util.List;
 
+public class VetsResponseDto {
+
+
+    @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
     public static class READ {
-        private Long ownerId;
+
+        private Long vetId;
 
         private String firstName;
 
         private String lastName;
 
-        private String address;
-
-        private String city;
-
-        private String telephone;
+        private List<VetsSpecialties> specialties;
     }
 
+    @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    @Getter
     public static class DETAIL_READ {
-        private Long ownerId;
+
+        private Long vetId;
 
         private String firstName;
 
         private String lastName;
 
-        private String address;
-
-        private String city;
-
-        private String telephone;
+        private List<VetsSpecialties> specialties;
     }
 
 }

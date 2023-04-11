@@ -1,26 +1,22 @@
-package kr.co.jshpetclinicstudy.service.model;
+package kr.co.jshpetclinicstudy.service.model.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-public class OwnersRequestDto {
+public class VetsRequestDto {
 
     @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
     public static class CREATE {
+
         private String firstName;
 
         private String lastName;
 
-        private String address;
-
-        private String city;
-
-        private String telephone;
     }
 
     @Getter
@@ -28,16 +24,12 @@ public class OwnersRequestDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class UPDATE {
-        private Long ownerId;
+
+        private Long vetId;
 
         private String firstName;
 
         private String lastName;
 
-        private String address;
-
-        private String city;
-
-        private String telephone;
     }
 }

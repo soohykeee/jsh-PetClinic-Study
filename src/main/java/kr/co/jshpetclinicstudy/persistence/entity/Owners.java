@@ -1,8 +1,8 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
-import kr.co.jshpetclinicstudy.service.model.OwnersRequestDto;
-import kr.co.jshpetclinicstudy.service.model.OwnersResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.OwnersRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.OwnersResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

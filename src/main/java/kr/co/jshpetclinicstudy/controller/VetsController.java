@@ -2,10 +2,9 @@ package kr.co.jshpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
 import kr.co.jshpetclinicstudy.service.VetsService;
-import kr.co.jshpetclinicstudy.service.model.VetsRequestDto;
-import kr.co.jshpetclinicstudy.service.model.VetsResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.VetsRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.VetsResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

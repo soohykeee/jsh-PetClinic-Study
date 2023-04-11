@@ -4,8 +4,8 @@ import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Pets;
 import kr.co.jshpetclinicstudy.persistence.entity.Types;
 import kr.co.jshpetclinicstudy.persistence.repository.PetsRepository;
-import kr.co.jshpetclinicstudy.service.model.PetsRequestDto;
-import kr.co.jshpetclinicstudy.service.model.PetsResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.PetsRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.PetsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

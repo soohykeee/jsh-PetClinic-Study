@@ -2,8 +2,8 @@ package kr.co.jshpetclinicstudy.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Owners;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnersRepository;
-import kr.co.jshpetclinicstudy.service.model.OwnersRequestDto;
-import kr.co.jshpetclinicstudy.service.model.OwnersResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.OwnersRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.OwnersResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

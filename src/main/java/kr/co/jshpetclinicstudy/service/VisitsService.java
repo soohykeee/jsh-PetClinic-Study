@@ -3,8 +3,8 @@ package kr.co.jshpetclinicstudy.service;
 import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Visits;
 import kr.co.jshpetclinicstudy.persistence.repository.VisitsRepository;
-import kr.co.jshpetclinicstudy.service.model.VisitsRequestDto;
-import kr.co.jshpetclinicstudy.service.model.VisitsResponseDto;
+import kr.co.jshpetclinicstudy.service.model.request.VisitsRequestDto;
+import kr.co.jshpetclinicstudy.service.model.response.VisitsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

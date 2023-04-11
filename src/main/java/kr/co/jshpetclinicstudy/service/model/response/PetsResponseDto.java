@@ -1,4 +1,4 @@
-package kr.co.jshpetclinicstudy.service.model;
+package kr.co.jshpetclinicstudy.service.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
