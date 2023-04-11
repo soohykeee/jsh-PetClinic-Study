@@ -25,22 +25,4 @@ public class OwnersResponseDto {
         private String telephone;
     }
 
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    public static class DETAIL_READ {
-        private Long ownerId;
-
-        private String firstName;
-
-        private String lastName;
-
-        private String address;
-
-        private String city;
-
-        private String telephone;
-    }
-
 }

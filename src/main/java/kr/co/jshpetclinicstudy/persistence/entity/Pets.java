@@ -41,37 +41,6 @@ public class Pets extends BaseEntity{
         this.types = types;
     }
 
-    public static Pets dtoToEntity(PetsRequestDto.CREATE create) {
-        return Pets.builder()
-                .name(create.getName())
-                .birthDate(create.getBirthDate())
-                .owners(create.getOwners())
-                .types(Types.valueOf(create.getType()))
-                .build();
-    }
-
-    public static PetsResponseDto.READ entityToDto(Pets pets) {
-        return PetsResponseDto.READ.builder()
-                .petId(pets.getId())
-                .name(pets.getName())
-                .birthDate(pets.getBirthDate())
-                .ownerTelephone(pets.getOwners().getTelephone())
-                .ownerFirstName(pets.getOwners().getFirstName())
-                .type(pets.getTypes().toString())
-                .build();
-    }
-
-    public static PetsResponseDto.DETAIL_READ entityToDetailDto(Pets pets) {
-        return PetsResponseDto.DETAIL_READ.builder()
-                .petId(pets.getId())
-                .name(pets.getName())
-                .birthDate(pets.getBirthDate())
-                .ownerTelephone(pets.getOwners().getTelephone())
-                .ownerFirstName(pets.getOwners().getFirstName())
-                .type(pets.getTypes().toString())
-                .build();
-    }
-
     public void changePetName(String changeName) {
         this.name = changeName;
     }

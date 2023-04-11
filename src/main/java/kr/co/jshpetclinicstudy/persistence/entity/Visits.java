@@ -35,36 +35,6 @@ public class Visits extends BaseEntity{
         this.pets = pets;
     }
 
-
-    public static Visits dtoToEntity(VisitsRequestDto.CREATE create) {
-        return Visits.builder()
-                .visitDate(create.getVisitDate())
-                .description(create.getDescription())
-                .pets(create.getPets())
-                .build();
-    }
-
-    public static VisitsResponseDto.READ entityToDto(Visits visits) {
-        return VisitsResponseDto.READ.builder()
-                .visitId(visits.getId())
-                .visitDate(visits.getVisitDate())
-                .description(visits.getDescription())
-                .pets(visits.getPets())
-                .build();
-    }
-
-    public static VisitsResponseDto.DETAIL_READ entityToDetailDto(Visits visits) {
-        return VisitsResponseDto.DETAIL_READ.builder()
-                .visitId(visits.getId())
-                .visitDate(visits.getVisitDate())
-                .description(visits.getDescription())
-                .pets(visits.getPets())
-                .petName(visits.getPets().getName())
-                .petType(visits.getPets().getTypes().toString())
-                .ownerFirstName(visits.getPets().getOwners().getFirstName())
-                .build();
-    }
-
     public void changeVisitDate(LocalDate changeVisitDate) {
         this.visitDate = changeVisitDate;
     }

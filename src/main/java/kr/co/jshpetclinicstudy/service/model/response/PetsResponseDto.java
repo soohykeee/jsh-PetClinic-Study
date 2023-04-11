@@ -24,24 +24,7 @@ public class PetsResponseDto {
 
         private String ownerTelephone;
 
-        private String type;
+        private String types;
     }
 
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    public static class DETAIL_READ {
-        private Long petId;
-
-        private String name;
-
-        private LocalDate birthDate;
-
-        private String ownerFirstName;
-
-        private String ownerTelephone;
-
-        private String type;
-    }
 }

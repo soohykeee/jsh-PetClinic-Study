@@ -35,23 +35,6 @@ public class Vets extends BaseEntity{
         this.specialties = specialties;
     }
 
-    public static Vets dtoToEntity(VetsRequestDto.CREATE create) {
-        return Vets.builder()
-                .firstName(create.getFirstName())
-                .lastName(create.getLastName())
-                .specialties(create.getSpecialties())
-                .build();
-    }
-
-    public static VetsResponseDto.READ entityToDto(Vets vets) {
-        return VetsResponseDto.READ.builder()
-                .vetId(vets.getId())
-                .firstName(vets.getFirstName())
-                .lastName(vets.getLastName())
-                .specialties(vets.getSpecialties())
-                .build();
-    }
-
     public void changeVetFirstName(String changeFirstName) {
         this.firstName = changeFirstName;
     }

@@ -26,9 +26,9 @@ public class VisitsController {
         return visitsService.getVisitList();
     }
 
-    public VisitsResponseDto.DETAIL_READ getVisit(Long id) {
-        VisitsResponseDto.DETAIL_READ detailRead = visitsService.getVisit(id);
-        return detailRead;
+    public VisitsResponseDto.READ getVisit(Long id) {
+        VisitsResponseDto.READ read = visitsService.getVisit(id);
+        return read;
     }
 
     public List<VisitsResponseDto.READ> getVisitListOfPet(Long petId) {

@@ -42,39 +42,6 @@ public class Owners extends BaseEntity {
         this.telephone = telephone;
     }
 
-
-    public static Owners dtoToEntity(OwnersRequestDto.CREATE create){
-        return Owners.builder()
-                .firstName(create.getFirstName())
-                .lastName(create.getLastName())
-                .address(create.getAddress())
-                .city(create.getCity())
-                .telephone(create.getTelephone())
-                .build();
-    }
-
-    public static OwnersResponseDto.READ entityToDto(Owners owners){
-        return OwnersResponseDto.READ.builder()
-                .ownerId(owners.getId())
-                .firstName(owners.getFirstName())
-                .lastName(owners.getLastName())
-                .address(owners.getAddress())
-                .city(owners.getCity())
-                .telephone(owners.getTelephone())
-                .build();
-    }
-
-    public static OwnersResponseDto.DETAIL_READ entityToDetailDto(Owners owners){
-        return OwnersResponseDto.DETAIL_READ.builder()
-                .ownerId(owners.getId())
-                .firstName(owners.getFirstName())
-                .lastName(owners.getLastName())
-                .address(owners.getAddress())
-                .city(owners.getCity())
-                .telephone(owners.getTelephone())
-                .build();
-    }
-
     public void changeOwnerAddress(String changeAddress) {
         this.address = changeAddress;
     }

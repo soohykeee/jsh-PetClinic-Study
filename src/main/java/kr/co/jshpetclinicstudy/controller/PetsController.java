@@ -26,9 +26,9 @@ public class PetsController {
         return petsService.getPetList();
     }
 
-    public PetsResponseDto.DETAIL_READ getPet(Long id) {
-        PetsResponseDto.DETAIL_READ detailRead = petsService.getPet(id);
-        return detailRead;
+    public PetsResponseDto.READ getPet(Long id) {
+        PetsResponseDto.READ read = petsService.getPet(id);
+        return read;
     }
 
     public List<PetsResponseDto.READ> getPetListOfOwner(Long ownerId) {

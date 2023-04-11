@@ -51,7 +51,7 @@ class VisitsServiceTest {
 
     @Test
     void getVisit() {
-        VisitsResponseDto.DETAIL_READ detailRead = visitsService.getVisit(1L);
+        VisitsResponseDto.READ detailRead = visitsService.getVisit(1L);
         assertThat(detailRead.getOwnerFirstName()).isEqualTo("수혁");
         assertThat(detailRead.getPetName()).isEqualTo("멍멍이");
     }

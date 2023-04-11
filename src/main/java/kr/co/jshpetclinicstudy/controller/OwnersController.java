@@ -27,9 +27,9 @@ public class OwnersController {
         return ownersService.getOwnerList();
     }
 
-    public OwnersResponseDto.DETAIL_READ getOwner(Long id) {
-        OwnersResponseDto.DETAIL_READ detailRead = ownersService.getOwner(id);
-        return detailRead;
+    public OwnersResponseDto.READ getOwner(Long id) {
+        OwnersResponseDto.READ read = ownersService.getOwner(id);
+        return read;
     }
 
     public void updateOwner(@RequestBody @Valid OwnersRequestDto.UPDATE update) {

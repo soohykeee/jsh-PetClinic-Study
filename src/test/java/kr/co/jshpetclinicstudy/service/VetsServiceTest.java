@@ -1,9 +1,6 @@
 package kr.co.jshpetclinicstudy.service;
 
-import kr.co.jshpetclinicstudy.persistence.entity.Specialties;
 import kr.co.jshpetclinicstudy.persistence.entity.Vets;
-import kr.co.jshpetclinicstudy.persistence.entity.VetsSpecialties;
-import kr.co.jshpetclinicstudy.persistence.repository.SpecialtiesRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VetsRepository;
 import kr.co.jshpetclinicstudy.service.model.request.VetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetsResponseDto;
@@ -11,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
