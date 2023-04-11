@@ -4,6 +4,7 @@ import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Pets;
 import kr.co.jshpetclinicstudy.persistence.entity.Types;
 import kr.co.jshpetclinicstudy.persistence.repository.PetsRepository;
+import kr.co.jshpetclinicstudy.service.model.mapper.PetsMappers;
 import kr.co.jshpetclinicstudy.service.model.request.PetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.PetsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -19,39 +20,46 @@ public class PetsService {
 
     private final PetsRepository petsRepository;
 
+    private final PetsMappers petsMappers;
+
+    @Transactional
     public void createPet(PetsRequestDto.CREATE create) {
-        final Pets pets = Pets.dtoToEntity(create);
+        final Pets pets = petsMappers.toPetsEntity(create);
         petsRepository.save(pets);
     }
 
     @Transactional
     public List<PetsResponseDto.READ> getPetList() {
         return petsRepository.findAll().stream()
-                .map(Pets::entityToDto).collect(Collectors.toList());
+                .map(petsMappers::toReadDto).collect(Collectors.toList());
     }
 
     @Transactional
-    public PetsResponseDto.DETAIL_READ getPet(Long id) {
-        return Pets.entityToDetailDto(petsRepository.findById(id).get());
+    public PetsResponseDto.READ getPet(Long id) {
+        final Optional<Pets> pets = petsRepository.findById(id);
+        isPets(pets);
+        return petsMappers.toReadDto(pets.get());
     }
 
     @Transactional
     public List<PetsResponseDto.READ> getPetListOfOwner(Long ownerId) {
         return petsRepository.findPetListByOwnerId(ownerId).stream()
-                .map(Pets::entityToDto).collect(Collectors.toList());
+                .map(petsMappers::toReadDto).collect(Collectors.toList());
     }
 
+    @Transactional
     public void updatePet(PetsRequestDto.UPDATE update) {
         final Optional<Pets> pets = petsRepository.findById(update.getPetId());
         isPets(pets);
 
         pets.get().changePetName(update.getName());
         pets.get().changePetBirtDate(update.getBirthDate());
-        pets.get().changePetType(Types.valueOf(update.getType()));
+        pets.get().changePetType(Types.valueOf(update.getTypes()));
 
         petsRepository.save(pets.get());
     }
 
+    @Transactional
     public void deletePet(Long id) {
         final Optional<Pets> pets = petsRepository.findById(id);
         isPets(pets);

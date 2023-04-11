@@ -23,9 +23,11 @@ class VetsServiceTest {
 
     @Test
     void createVet() {
+
         VetsRequestDto.CREATE create = VetsRequestDto.CREATE.builder()
                 .firstName("닥터")
                 .lastName("김")
+//                .specialties()
                 .build();
 
         vetsService.createVet(create);
@@ -43,8 +45,8 @@ class VetsServiceTest {
 
     @Test
     void getVet() {
-        VetsResponseDto.DETAIL_READ detailRead = vetsService.getVet(1L);
-        assertThat(detailRead.getFirstName()).isEqualTo("닥터");
+        VetsResponseDto.READ read = vetsService.getVet(1L);
+        assertThat(read.getFirstName()).isEqualTo("닥터");
     }
 
     @Test

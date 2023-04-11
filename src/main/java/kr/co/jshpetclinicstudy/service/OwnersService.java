@@ -1,7 +1,9 @@
 package kr.co.jshpetclinicstudy.service;
 
+import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Owners;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnersRepository;
+import kr.co.jshpetclinicstudy.service.model.mapper.OwnersMappers;
 import kr.co.jshpetclinicstudy.service.model.request.OwnersRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.OwnersResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -17,20 +19,27 @@ public class OwnersService {
 
     private final OwnersRepository ownersRepository;
 
+    private final OwnersMappers ownersMappers;
+
+    @Transactional
     public void createOwner(OwnersRequestDto.CREATE create) {
-        final Owners owners = Owners.dtoToEntity(create);
+        final Owners owners = ownersMappers.toOwnersEntity(create);
         ownersRepository.save(owners);
     }
 
     public List<OwnersResponseDto.READ> getOwnerList() {
         return ownersRepository.findAll().stream()
-                .map(Owners::entityToDto).collect(Collectors.toList());
+                .map(ownersMappers::toReadDto).collect(Collectors.toList());
     }
 
-    public OwnersResponseDto.DETAIL_READ getOwner(Long id) {
-        return Owners.entityToDetailDto(ownersRepository.findById(id).get());
+    public OwnersResponseDto.READ getOwner(Long id) {
+        final Optional<Owners> owners = ownersRepository.findById(id);
+        isOwners(owners);
+
+        return ownersMappers.toReadDto(owners.get());
     }
 
+    @Transactional
     public void updateOwner(OwnersRequestDto.UPDATE update) {
         final Optional<Owners> owners = ownersRepository.findById(update.getOwnerId());
         isOwners(owners);
@@ -44,6 +53,7 @@ public class OwnersService {
         ownersRepository.save(owners.get());
     }
 
+    @Transactional
     public void deleteOwner(Long id) {
         final Optional<Owners> owners = ownersRepository.findById(id);
         isOwners(owners);

@@ -26,9 +26,9 @@ public class VetsController {
         return vetsService.getVetList();
     }
 
-    public VetsResponseDto.DETAIL_READ getVet(Long id) {
-        VetsResponseDto.DETAIL_READ detailRead = vetsService.getVet(id);
-        return detailRead;
+    public VetsResponseDto.READ getVet(Long id) {
+        VetsResponseDto.READ read = vetsService.getVet(id);
+        return read;
     }
 
     public void updateVet(@RequestBody @Valid VetsRequestDto.UPDATE update) {

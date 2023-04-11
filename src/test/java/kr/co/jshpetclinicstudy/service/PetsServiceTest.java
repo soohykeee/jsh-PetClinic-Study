@@ -34,7 +34,7 @@ class PetsServiceTest {
                 .name("멍멍이")
                 .birthDate(LocalDate.of(2021, 1, 9))
                 .owners(owners.get())
-                .type("푸들")
+                .types("푸들")
                 .build();
 
         petsService.createPet(create);
@@ -52,17 +52,17 @@ class PetsServiceTest {
 
     @Test
     void getPet() {
-        PetsResponseDto.DETAIL_READ detailRead = petsService.getPet(2L);
-        assertThat(detailRead.getName()).isEqualTo("뭉이");
+        PetsResponseDto.READ detailRead = petsService.getPet(1L);
+        assertThat(detailRead.getName()).isEqualTo("멍멍이");
         assertThat(detailRead.getOwnerFirstName()).isEqualTo("수혁");
     }
 
     @Test
     void getPetListOfOwner() {
-        List<PetsResponseDto.READ> petListOfOwner = petsService.getPetListOfOwner(1L);
+        List<PetsResponseDto.READ> petListOfOwner = petsService.getPetListOfOwner(2L);
 
-        assertThat(petListOfOwner.get(2).getName()).isEqualTo("초코");
-        assertThat(petListOfOwner.size()).isEqualTo(3);
+        assertThat(petListOfOwner.get(0).getName()).isEqualTo("멍멍이");
+        assertThat(petListOfOwner.size()).isEqualTo(1);
     }
 
     @Test
@@ -71,7 +71,7 @@ class PetsServiceTest {
                 .petId(3L)
                 .name("딸기")
                 .birthDate(LocalDate.of(2011, 01, 01))
-                .type("포메라니안")
+                .types("포메라니안")
                 .build();
 
         petsService.updatePet(update);

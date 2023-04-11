@@ -1,8 +1,6 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
-import kr.co.jshpetclinicstudy.service.model.request.SpecialtiesRequestDto;
-import kr.co.jshpetclinicstudy.service.model.response.SpecialtiesResponseDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,29 +28,5 @@ public class Specialties extends BaseEntity {
         this.vets = vets;
     }
 
-    public static Specialties dtoToEntity(SpecialtiesRequestDto.CREATE create) {
-        return Specialties.builder()
-                .name(create.getName())
-                .build();
-    }
 
-    public static SpecialtiesResponseDto.READ entityToDto(Specialties specialties) {
-        return SpecialtiesResponseDto.READ.builder()
-                .specialtyId(specialties.getId())
-                .name(specialties.getName())
-                .vets(specialties.getVets())
-                .build();
-    }
-
-    public static SpecialtiesResponseDto.DETAIL_READ entityToDetailDto(Specialties specialties) {
-        return SpecialtiesResponseDto.DETAIL_READ.builder()
-                .specialtyId(specialties.getId())
-                .name(specialties.getName())
-                .vets(specialties.getVets())
-                .build();
-    }
-
-    public void changeSpecialtyName(String changeName) {
-        this.name = changeName;
-    }
 }

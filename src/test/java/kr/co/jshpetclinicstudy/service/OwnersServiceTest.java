@@ -46,14 +46,14 @@ class OwnersServiceTest {
 
     @Test
     void getOwner() {
-        OwnersResponseDto.DETAIL_READ detailRead = ownersService.getOwner(2L);
-        assertThat(detailRead.getTelephone()).isEqualTo("01064564655");
+        OwnersResponseDto.READ read = ownersService.getOwner(1L);
+        assertThat(read.getTelephone()).isEqualTo("01064564655");
     }
 
     @Test
     void updateOwner() {
         OwnersRequestDto.UPDATE update = OwnersRequestDto.UPDATE.builder()
-                .ownerId(2L)
+                .ownerId(1L)
                 .firstName("철수")
                 .lastName("김")
                 .address("성북구 정릉동")
@@ -62,13 +62,13 @@ class OwnersServiceTest {
                 .build();
 
         ownersService.updateOwner(update);
-        assertThat(ownersRepository.findById(2L).get().getFirstName()).isEqualTo("철수");
+        assertThat(ownersRepository.findById(1L).get().getFirstName()).isEqualTo("철수");
     }
 
     @Test
     void deleteOwner() {
-        ownersService.deleteOwner(2L);
-        assertThat(ownersRepository.findById(2L)).isEmpty();
+        ownersService.deleteOwner(1L);
+        assertThat(ownersRepository.findById(1L)).isEmpty();
     }
 
 }

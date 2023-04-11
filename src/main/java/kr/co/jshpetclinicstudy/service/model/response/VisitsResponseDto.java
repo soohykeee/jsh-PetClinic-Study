@@ -23,22 +23,6 @@ public class VisitsResponseDto {
         private String description;
 
         private Pets pets;
-    }
-
-
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    public static class DETAIL_READ {
-
-        private Long visitId;
-
-        private LocalDate visitDate;
-
-        private String description;
-
-        private Pets pets;
 
         private String petName;
 
@@ -46,4 +30,5 @@ public class VisitsResponseDto {
 
         private String ownerFirstName;
     }
+
 }

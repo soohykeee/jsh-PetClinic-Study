@@ -22,7 +22,7 @@ public class PetsRequestDto {
 
         private Owners owners;
 
-        private String type;
+        private String types;
     }
 
     @Getter
@@ -39,6 +39,6 @@ public class PetsRequestDto {
 
         private Owners owners;
 
-        private String type;
+        private String types;
     }
 }

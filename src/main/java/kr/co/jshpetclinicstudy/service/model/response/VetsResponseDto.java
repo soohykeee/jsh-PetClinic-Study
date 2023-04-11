@@ -10,27 +10,11 @@ import java.util.List;
 
 public class VetsResponseDto {
 
-
     @Getter
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
     public static class READ {
-
-        private Long vetId;
-
-        private String firstName;
-
-        private String lastName;
-
-        private List<VetsSpecialties> specialties;
-    }
-
-    @Getter
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class DETAIL_READ {
 
         private Long vetId;
 
