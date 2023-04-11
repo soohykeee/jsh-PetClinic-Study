@@ -39,20 +39,12 @@ public class Vets extends BaseEntity{
         return Vets.builder()
                 .firstName(create.getFirstName())
                 .lastName(create.getLastName())
+                .specialties(create.getSpecialties())
                 .build();
     }
 
     public static VetsResponseDto.READ entityToDto(Vets vets) {
         return VetsResponseDto.READ.builder()
-                .vetId(vets.getId())
-                .firstName(vets.getFirstName())
-                .lastName(vets.getLastName())
-                .specialties(vets.getSpecialties())
-                .build();
-    }
-
-    public static VetsResponseDto.DETAIL_READ entityToDetailDto(Vets vets) {
-        return VetsResponseDto.DETAIL_READ.builder()
                 .vetId(vets.getId())
                 .firstName(vets.getFirstName())
                 .lastName(vets.getLastName())
@@ -66,5 +58,9 @@ public class Vets extends BaseEntity{
 
     public void changeVetLastName(String changeLastName) {
         this.lastName = changeLastName;
+    }
+
+    public void changeVetSpecialties(List<VetsSpecialties> changeSpecialties) {
+        this.specialties = changeSpecialties;
     }
 }

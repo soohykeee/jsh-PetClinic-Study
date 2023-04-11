@@ -1,6 +1,9 @@
 package kr.co.jshpetclinicstudy.service;
 
+import kr.co.jshpetclinicstudy.persistence.entity.Specialties;
 import kr.co.jshpetclinicstudy.persistence.entity.Vets;
+import kr.co.jshpetclinicstudy.persistence.entity.VetsSpecialties;
+import kr.co.jshpetclinicstudy.persistence.repository.SpecialtiesRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VetsRepository;
 import kr.co.jshpetclinicstudy.service.model.request.VetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetsResponseDto;
@@ -8,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +27,11 @@ class VetsServiceTest {
 
     @Test
     void createVet() {
+
         VetsRequestDto.CREATE create = VetsRequestDto.CREATE.builder()
                 .firstName("닥터")
                 .lastName("김")
+//                .specialties()
                 .build();
 
         vetsService.createVet(create);
@@ -43,8 +49,8 @@ class VetsServiceTest {
 
     @Test
     void getVet() {
-        VetsResponseDto.DETAIL_READ detailRead = vetsService.getVet(1L);
-        assertThat(detailRead.getFirstName()).isEqualTo("닥터");
+        VetsResponseDto.READ read = vetsService.getVet(1L);
+        assertThat(read.getFirstName()).isEqualTo("닥터");
     }
 
     @Test

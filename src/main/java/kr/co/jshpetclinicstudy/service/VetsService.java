@@ -26,8 +26,8 @@ public class VetsService {
         return vetsRepository.findAll().stream().map(Vets::entityToDto).collect(Collectors.toList());
     }
 
-    public VetsResponseDto.DETAIL_READ getVet(Long id) {
-        return Vets.entityToDetailDto(vetsRepository.findById(id).get());
+    public VetsResponseDto.READ getVet(Long id) {
+        return Vets.entityToDto(vetsRepository.findById(id).get());
     }
 
     public void updateVet(VetsRequestDto.UPDATE update) {
@@ -36,6 +36,7 @@ public class VetsService {
 
         vets.get().changeVetFirstName(update.getFirstName());
         vets.get().changeVetLastName(update.getLastName());
+        vets.get().changeVetSpecialties(update.getSpecialties());
 
         vetsRepository.save(vets.get());
     }

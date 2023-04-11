@@ -27,22 +27,4 @@ public class VetsSpecialties extends BaseEntity {
         this.vets = vets;
     }
 
-   /* public static VetsSpecialties dtoToEntity(VetsSpecialtiesRequestDto.CREATE create) {
-        return VetsSpecialties.builder()
-                .vets(create.getVets())
-                .specialties(create.getSpecialties())
-                .build();
-    }
-
-    public static VetsSpecialtiesResponseDto.READ_VETS entityToVetsDto(VetsSpecialties vetsSpecialties) {
-        return VetsSpecialtiesResponseDto.READ_VETS.builder()
-                .vetSpecialtyId(vetsSpecialties.getId())
-                .specialties(vetsSpecialties.getSpecialties())
-                .vetsList(vetsSpecialties.getVets())
-                .build();
-    }
-
-    public static VetsSpecialtiesResponseDto.READ_SPEC entityToSpecDto(VetsSpecialties vetsSpecialties) {
-
-    }*/
 }
