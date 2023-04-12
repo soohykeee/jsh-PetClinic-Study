@@ -5,12 +5,11 @@ import kr.co.jshpetclinicstudy.service.model.request.VetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetsResponseDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface VetsMappers {
+public interface VetsMapper {
 
-    Vets toVetsEntity(VetsRequestDto.CREATE create);
+    Vets toEntity(VetsRequestDto.CREATE create);
 
     @Mapping(target = "vetId", source = "id")
     VetsResponseDto.READ toReadDto(Vets vets);
