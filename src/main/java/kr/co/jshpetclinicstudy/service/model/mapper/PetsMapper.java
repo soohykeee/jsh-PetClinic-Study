@@ -7,9 +7,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface PetsMappers {
+public interface PetsMapper {
 
-    Pets toPetsEntity(PetsRequestDto.CREATE create);
+    Pets toEntity(PetsRequestDto.CREATE create);
 
     @Mapping(target="petId", source = "id")
     @Mapping(target = "ownerFirstName", source = "owners.firstName")

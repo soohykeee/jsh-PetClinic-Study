@@ -3,7 +3,7 @@ package kr.co.jshpetclinicstudy.service;
 import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Vets;
 import kr.co.jshpetclinicstudy.persistence.repository.VetsRepository;
-import kr.co.jshpetclinicstudy.service.model.mapper.VetsMappers;
+import kr.co.jshpetclinicstudy.service.model.mapper.VetsMapper;
 import kr.co.jshpetclinicstudy.service.model.request.VetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -19,11 +19,11 @@ public class VetsService {
 
     private final VetsRepository vetsRepository;
 
-    private final VetsMappers vetsMappers;
+    private final VetsMapper vetsMappers;
 
     @Transactional
     public void createVet(VetsRequestDto.CREATE create) {
-        final Vets vets = vetsMappers.toVetsEntity(create);
+        final Vets vets = vetsMappers.toEntity(create);
         vetsRepository.save(vets);
     }
 

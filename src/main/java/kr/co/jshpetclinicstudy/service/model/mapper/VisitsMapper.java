@@ -8,11 +8,9 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
-public interface VisitsMappers {
+public interface VisitsMapper {
 
-    VisitsMappers INSTANCE = Mappers.getMapper(VisitsMappers.class);
-
-    Visits toVisitsEntity(VisitsRequestDto.CREATE create);
+    Visits toEntity(VisitsRequestDto.CREATE create);
 
     @Mapping(target = "visitId", source = "id")
     @Mapping(target = "petName", source = "pets.name")

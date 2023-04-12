@@ -4,7 +4,7 @@ import jakarta.transaction.Transactional;
 import kr.co.jshpetclinicstudy.persistence.entity.Pets;
 import kr.co.jshpetclinicstudy.persistence.entity.Types;
 import kr.co.jshpetclinicstudy.persistence.repository.PetsRepository;
-import kr.co.jshpetclinicstudy.service.model.mapper.PetsMappers;
+import kr.co.jshpetclinicstudy.service.model.mapper.PetsMapper;
 import kr.co.jshpetclinicstudy.service.model.request.PetsRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.PetsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -20,11 +20,11 @@ public class PetsService {
 
     private final PetsRepository petsRepository;
 
-    private final PetsMappers petsMappers;
+    private final PetsMapper petsMappers;
 
     @Transactional
     public void createPet(PetsRequestDto.CREATE create) {
-        final Pets pets = petsMappers.toPetsEntity(create);
+        final Pets pets = petsMappers.toEntity(create);
         petsRepository.save(pets);
     }
 
