@@ -22,9 +22,9 @@ public class VetController {
         vetService.createVet(create);
     }
 
-    public List<VetResponseDto.READ> getVetList() {
-        return vetService.getVetList();
-    }
+//    public List<VetResponseDto.READ> getVetList() {
+//        return vetService.getVetList();
+//    }
 
     public VetResponseDto.READ getVet(Long id) {
         VetResponseDto.READ read = vetService.getVet(id);
