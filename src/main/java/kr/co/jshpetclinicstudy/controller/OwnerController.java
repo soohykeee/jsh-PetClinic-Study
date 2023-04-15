@@ -29,10 +29,11 @@ public class OwnerController {
         try {
             ownerService.createOwner(create);
             return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_TELEPHONE_DUPLICATED);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - DuplicatedException - Owner Phone is Not Unique Case
     }
 
     /**
