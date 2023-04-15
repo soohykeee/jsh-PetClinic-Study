@@ -21,27 +21,23 @@ public class Vet extends BaseEntity{
     @Column(name = "last_name", length = 30)
     private String lastName;
 
-    @OneToMany(mappedBy = "vets")
-    private List<VetSpecialty> specialties = new ArrayList<>();
+    @OneToMany(
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE, CascadeType.ALL},
+            mappedBy = "vet"
+    )
+    private List<VetSpecialty> vetSpecialties = new ArrayList<>();
 
     @Builder
     public Vet(String firstName,
                String lastName,
-               List<VetSpecialty> specialties) {
+               List<VetSpecialty> vetSpecialties) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.specialties = specialties;
-    }
-
-    public void changeVetFirstName(String changeFirstName) {
-        this.firstName = changeFirstName;
-    }
-
-    public void changeVetLastName(String changeLastName) {
-        this.lastName = changeLastName;
+        this.vetSpecialties = vetSpecialties;
     }
 
     public void changeVetSpecialties(List<VetSpecialty> changeSpecialties) {
-        this.specialties = changeSpecialties;
+        this.vetSpecialties = changeSpecialties;
     }
 }

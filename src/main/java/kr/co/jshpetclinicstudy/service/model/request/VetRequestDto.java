@@ -1,6 +1,5 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
-import kr.co.jshpetclinicstudy.persistence.entity.VetSpecialty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,8 +19,7 @@ public class VetRequestDto {
 
         private String lastName;
 
-        private List<VetSpecialty> specialties;
-
+        private List<String> specialtiesName;
     }
 
     @Getter
@@ -36,7 +34,7 @@ public class VetRequestDto {
 
         private String lastName;
 
-        private List<VetSpecialty> specialties;
+        private List<String> specialtiesName;
 
     }
 }

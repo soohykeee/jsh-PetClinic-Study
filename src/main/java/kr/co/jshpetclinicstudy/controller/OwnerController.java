@@ -1,15 +1,15 @@
 package kr.co.jshpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
+import kr.co.jshpetclinicstudy.infra.exception.DuplicatedException;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
+import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.service.OwnerService;
 import kr.co.jshpetclinicstudy.service.model.request.OwnerRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.OwnerResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,26 +18,79 @@ public class OwnerController {
 
     private final OwnerService ownerService;
 
-    //CRUD 개발 시작 기능은 만들었다고 가정
-    public void createOwner(@RequestBody @Valid OwnerRequestDto.CREATE create){
-        ownerService.createOwner(create);
+    /**
+     * Create Owner API
+     *
+     * @param create
+     * @return
+     */
+    @PostMapping
+    public ResponseFormat<Void> createOwner(@RequestBody @Valid OwnerRequestDto.CREATE create){
+        try {
+            ownerService.createOwner(create);
+            return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_TELEPHONE_DUPLICATED);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
     }
 
-    public List<OwnerResponseDto.READ> getOwnerList() {
-        return ownerService.getOwnerList();
+    /**
+     * Read(Get) Owner API
+     *
+     * @param ownerId
+     * @return
+     */
+    @GetMapping("/{owner_id}")
+    public ResponseFormat<OwnerResponseDto.READ> getOwner(@PathVariable(name = "owner_id") Long ownerId) {
+        try {
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwner(ownerId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
     }
 
-    public OwnerResponseDto.READ getOwner(Long id) {
-        OwnerResponseDto.READ read = ownerService.getOwner(id);
-        return read;
+    /**
+     * Update Owner API
+     *
+     * @param update
+     * @return
+     */
+    @PutMapping
+    public ResponseFormat<Void> updateOwner(@RequestBody @Valid OwnerRequestDto.UPDATE update) {
+        try {
+            ownerService.updateOwner(update);
+            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_TELEPHONE_DUPLICATED);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
+
     }
 
-    public void updateOwner(@RequestBody @Valid OwnerRequestDto.UPDATE update) {
-        ownerService.updateOwner(update);
-    }
+    /**
+     * Delete Owner API
+     *
+     * @param ownerId
+     * @return
+     */
+    @DeleteMapping("/{owner_id}")
+    public ResponseFormat<Void> deleteOwner(@PathVariable(name = "owner_id") Long ownerId) {
 
-    public void deleteOwner(Long id) {
-        ownerService.deleteOwner(id);
+        try {
+            ownerService.deleteOwner(ownerId);
+            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
     }
 
 }

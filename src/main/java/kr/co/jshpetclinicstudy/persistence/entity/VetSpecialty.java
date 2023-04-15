@@ -12,19 +12,18 @@ import lombok.NoArgsConstructor;
 @Table(name = "tbl_vets_specialties")
 public class VetSpecialty extends BaseEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "specialty_id")
-    private Specialty specialties;
-
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "vet_id")
-    private Vet vets;
+    private Vet vet;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "specialty_id")
+    private Specialty specialty;
 
     @Builder
-    public VetSpecialty(Specialty specialties,
-                        Vet vets) {
-        this.specialties = specialties;
-        this.vets = vets;
+    public VetSpecialty(Vet vet,
+                        Specialty specialty) {
+        this.vet = vet;
+        this.specialty = specialty;
     }
-
 }

@@ -1,6 +1,5 @@
 package kr.co.jshpetclinicstudy.service.model.response;
 
-import kr.co.jshpetclinicstudy.persistence.entity.VetSpecialty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,13 +15,11 @@ public class VetResponseDto {
     @NoArgsConstructor
     public static class READ {
 
-        private Long vetId;
-
         private String firstName;
 
         private String lastName;
 
-        private List<VetSpecialty> specialties;
+        private List<String> specialtiesName;
     }
 
 }
