@@ -1,6 +1,8 @@
 package kr.co.jshpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
+import kr.co.jshpetclinicstudy.infra.exception.DuplicatedException;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.service.OwnerService;
@@ -33,10 +35,6 @@ public class OwnerController {
         // TODO - DuplicatedException - Owner Phone is Not Unique Case
     }
 
-//    public List<OwnerResponseDto.READ> getOwnerList() {
-//        return ownerService.getOwnerList();
-//    }
-
     /**
      * Read(Get) Owner API
      *
@@ -47,10 +45,11 @@ public class OwnerController {
     public ResponseFormat<OwnerResponseDto.READ> getOwner(@PathVariable(name = "owner_id") Long ownerId) {
         try {
             return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwner(ownerId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Owner is Empty Case
     }
 
     /**
@@ -64,11 +63,13 @@ public class OwnerController {
         try {
             ownerService.updateOwner(update);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (DuplicatedException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_TELEPHONE_DUPLICATED);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - DuplicatedException - Owner Phone is Not Unique Case
-        // TODO - NotFoundException - If Owner is Empty Case
 
     }
 
@@ -84,10 +85,11 @@ public class OwnerController {
         try {
             ownerService.deleteOwner(ownerId);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Owner is Empty Case
     }
 
 }

@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.service.VetService;
@@ -43,10 +44,11 @@ public class VetController {
     public ResponseFormat<VetResponseDto.READ> getVet(@PathVariable(name = "vet_id") Long vetId) {
         try {
             return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVet(vetId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Vet is Empty Case
     }
 
     /**
@@ -60,10 +62,11 @@ public class VetController {
         try {
             vetService.updateVet(update);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Vet is Empty Case
     }
 
     /**
@@ -77,10 +80,11 @@ public class VetController {
         try {
             vetService.deleteVet(vetId);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Vet is Empty Case
     }
 
 }

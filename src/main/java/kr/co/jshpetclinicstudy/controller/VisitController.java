@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.controller;
 
 import jakarta.validation.Valid;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.service.VisitService;
@@ -29,15 +30,13 @@ public class VisitController {
         try {
             visitService.createVisit(create);
             return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Pet or Owner is Empty Case
     }
 
-//    public List<VisitResponseDto.READ> getVisitList() {
-//        return visitService.getVisitList();
-//    }
 
     /**
      * Read(Get) Visit API
@@ -49,10 +48,11 @@ public class VisitController {
     public ResponseFormat<VisitResponseDto.READ> getVisit(@PathVariable(name = "visit_id") Long visitId) {
         try {
             return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisit(visitId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Visit is Empty Case
     }
 
     /**
@@ -65,10 +65,11 @@ public class VisitController {
     public ResponseFormat<List<VisitResponseDto.READ>> getVisitListOfPet(@PathVariable(name = "pet_id") Long petId) {
         try {
             return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitListOfPet(petId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Pet is Empty Case
     }
 
     /**
@@ -82,10 +83,11 @@ public class VisitController {
         try {
             visitService.updateVisit(update);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Visit is Empty Case
     }
 
     /**
@@ -99,9 +101,10 @@ public class VisitController {
         try {
             visitService.deleteVisit(visitId);
             return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-        // TODO - NotFoundException - If Visit is Empty Case
     }
 }
