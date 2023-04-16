@@ -4,11 +4,15 @@ import jakarta.validation.Valid;
 import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
+import kr.co.jshpetclinicstudy.persistence.entity.Specialty;
 import kr.co.jshpetclinicstudy.service.VetService;
 import kr.co.jshpetclinicstudy.service.model.request.VetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
@@ -45,6 +49,20 @@ public class VetController {
             return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVet(vetId));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Get All Specialties API
+     *
+     * @return
+     */
+    @GetMapping("/specialties")
+    public ResponseFormat<Set<String>> getSpecialties() {
+        try {
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getSpecialties());
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }

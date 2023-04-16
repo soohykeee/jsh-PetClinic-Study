@@ -36,37 +36,38 @@ public class VetService {
 
     @Transactional
     public void createVet(VetRequestDto.CREATE create) {
-
         //Vet Entity Create
         Vet vet = vetMapper.toEntity(create, Collections.emptyList());
-
         //create or get
         final List<VetSpecialty> vetSpecialties = getOrCreateVetSpecialties(create.getSpecialtiesName(), vet);
-
         vet.changeVetSpecialties(vetSpecialties);
-
         vetRepository.save(vet);
     }
 
     @Transactional
     public VetResponseDto.READ getVet(Long id) {
         final Optional<Vet> vet = vetRepository.findById(id);
-
         isVet(vet);
-
         final List<String> specialtiesName = getSpecialtiesNameByVet(vet.get());
 
         return vetMapper.toReadDto(vet.get(), specialtiesName);
     }
 
+    public Set<String> getSpecialties() {
+        List<Specialty> specialties = specialtyRepository.findAll();
+
+        final Set<String> specialtyNames = specialties.stream()
+                .map(Specialty::getSpecialtyName)
+                .collect(Collectors.toSet());
+
+        return specialtyNames;
+    }
+
     @Transactional
     public void updateVet(VetRequestDto.UPDATE update) {
         final Optional<Vet> vet = vetRepository.findById(update.getVetId());
-
         isVet(vet);
-
         final List<VetSpecialty> vetSpecialties = getOrCreateVetSpecialties(update.getSpecialtiesName(), vet.get());
-
         vet.get().changeVetSpecialties(vetSpecialties);
 
         vetRepository.save(vet.get());
@@ -75,9 +76,7 @@ public class VetService {
     @Transactional
     public void deleteVet(Long id) {
         final Optional<Vet> vet = vetRepository.findById(id);
-
         isVet(vet);
-
         vetRepository.delete(vet.get());
     }
 
@@ -116,7 +115,6 @@ public class VetService {
     }
 
     private List<VetSpecialty> getOrCreateVetSpecialties(List<String> names, Vet vet) {
-
 
         final List<Specialty> specialties = getOrCreateVetSpecialtiesByNames(names);
 
