@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
+import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,8 @@ public class VisitRequestDto {
         private String description;
 
         private Pet pet;
+
+        private Vet vet;
     }
 
     @Getter
@@ -37,6 +40,7 @@ public class VisitRequestDto {
 
         private Pet pet;
 
+        private Vet vet;
     }
 
 

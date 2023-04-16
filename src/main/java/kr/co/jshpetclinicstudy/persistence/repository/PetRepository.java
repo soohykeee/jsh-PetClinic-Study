@@ -24,12 +24,7 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
             "where p.owner.id=:ownerId")
     List<Pet> findPetsByOwnerId(Long ownerId);
 
-    List<Pet> findPetsByOwner(Owner owner);
-
     // 테스트 코드 사용 위한 메서드
-    @Query("select p " +
-            "from Pet p " +
-            "where p.name=:name")
     Optional<Pet> findPetByName(String name);
 
 }

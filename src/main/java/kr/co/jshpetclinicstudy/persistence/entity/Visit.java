@@ -27,13 +27,19 @@ public class Visit extends BaseEntity{
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "vet_id")
+    private Vet vet;
+
     @Builder
     public Visit(LocalDate visitDate,
                  String description,
-                 Pet pet) {
+                 Pet pet,
+                 Vet vet) {
         this.visitDate = visitDate;
         this.description = description;
         this.pet = pet;
+        this.vet = vet;
     }
 
     public void changeVisitDate(LocalDate changeVisitDate) {

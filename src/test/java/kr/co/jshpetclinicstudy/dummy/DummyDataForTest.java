@@ -3,8 +3,10 @@ package kr.co.jshpetclinicstudy.dummy;
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.entity.Type;
+import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.VetRepository;
 import kr.co.jshpetclinicstudy.service.OwnerService;
 import kr.co.jshpetclinicstudy.service.PetService;
 import kr.co.jshpetclinicstudy.service.VetService;
@@ -17,7 +19,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,8 @@ public class DummyDataForTest {
 
     @Autowired
     private VetService vetService;
+    @Autowired
+    private VetRepository vetRepository;
 
 
     @Test
@@ -149,81 +152,6 @@ public class DummyDataForTest {
     }
 
     @Test
-    void createVisit() {
-        Optional<Pet> pet1 = petRepository.findPetByName("멍멍이푸들");
-        Optional<Pet> pet2 = petRepository.findPetByName("멍멍이시바");
-        Optional<Pet> pet3 = petRepository.findPetByName("야옹이러시안블루");
-        Optional<Pet> pet4 = petRepository.findPetByName("엉금거북이");
-        Optional<Pet> pet5 = petRepository.findPetByName("찍찍햄스터");
-        Optional<Pet> pet6 = petRepository.findPetByName("야옹이먼치킨");
-
-        VisitRequestDto.CREATE create1 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 10, 12))
-                .description("건강검진")
-                .pet(pet1.get())
-                .build();
-
-        VisitRequestDto.CREATE create2 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 11, 22))
-                .description("예방접종")
-                .pet(pet1.get())
-                .build();
-
-        VisitRequestDto.CREATE create3 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 5, 10))
-                .description("건강검진 및 예방접종")
-                .pet(pet2.get())
-                .build();
-
-        VisitRequestDto.CREATE create4 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 12, 2))
-                .description("복통 호소 및 구토")
-                .pet(pet3.get())
-                .build();
-
-        VisitRequestDto.CREATE create5 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2022, 5, 17))
-                .description("앞발 절뚝거림")
-                .pet(pet3.get())
-                .build();
-
-        VisitRequestDto.CREATE create6 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 1, 14))
-                .description("숨소리가 거칠고 무기력함")
-                .pet(pet4.get())
-                .build();
-
-        VisitRequestDto.CREATE create7 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 7, 28))
-                .description("예방접종")
-                .pet(pet5.get())
-                .build();
-
-        VisitRequestDto.CREATE create8 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 10, 5))
-                .description("돌에 긁혀 피가남")
-                .pet(pet5.get())
-                .build();
-
-        VisitRequestDto.CREATE create9 = VisitRequestDto.CREATE.builder()
-                .visitDate(LocalDate.of(2023, 9, 14))
-                .description("무기력함과 눈꼽이 자주낌")
-                .pet(pet6.get())
-                .build();
-
-        visitService.createVisit(create1);
-        visitService.createVisit(create2);
-        visitService.createVisit(create3);
-        visitService.createVisit(create4);
-        visitService.createVisit(create5);
-        visitService.createVisit(create6);
-        visitService.createVisit(create7);
-        visitService.createVisit(create8);
-        visitService.createVisit(create9);
-
-    }
-
-    @Test
     void createVet() {
 
         List<String> specialties1 = new ArrayList<>();
@@ -238,7 +166,6 @@ public class DummyDataForTest {
         List<String> specialties3 = new ArrayList<>();
         specialties3.add("치과");
         specialties3.add("영상진단과");
-
 
         VetRequestDto.CREATE create1 = VetRequestDto.CREATE.builder()
                 .firstName("사부")
@@ -261,6 +188,93 @@ public class DummyDataForTest {
         vetService.createVet(create1);
         vetService.createVet(create2);
         vetService.createVet(create3);
+    }
+
+    @Test
+    void createVisit() {
+        Optional<Pet> pet1 = petRepository.findPetByName("멍멍이푸들");
+        Optional<Pet> pet2 = petRepository.findPetByName("멍멍이시바");
+        Optional<Pet> pet3 = petRepository.findPetByName("야옹이러시안블루");
+        Optional<Pet> pet4 = petRepository.findPetByName("엉금거북이");
+        Optional<Pet> pet5 = petRepository.findPetByName("찍찍햄스터");
+        Optional<Pet> pet6 = petRepository.findPetByName("야옹이먼치킨");
+
+        Optional<Vet> vet1 = vetRepository.findVetByFirstName("사부");
+        Optional<Vet> vet2 = vetRepository.findVetByFirstName("국종");
+        Optional<Vet> vet3 = vetRepository.findVetByFirstName("명민");
+
+        VisitRequestDto.CREATE create1 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 10, 12))
+                .description("건강검진")
+                .pet(pet1.get())
+                .vet(vet1.get())
+                .build();
+
+        VisitRequestDto.CREATE create2 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 11, 22))
+                .description("예방접종")
+                .pet(pet1.get())
+                .vet(vet1.get())
+                .build();
+
+        VisitRequestDto.CREATE create3 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 5, 10))
+                .description("건강검진 및 예방접종")
+                .pet(pet2.get())
+                .vet(vet2.get())
+                .build();
+
+        VisitRequestDto.CREATE create4 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 12, 2))
+                .description("복통 호소 및 구토")
+                .pet(pet3.get())
+                .vet(vet3.get())
+                .build();
+
+        VisitRequestDto.CREATE create5 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2022, 5, 17))
+                .description("앞발 절뚝거림")
+                .pet(pet3.get())
+                .vet(vet3.get())
+                .build();
+
+        VisitRequestDto.CREATE create6 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 1, 14))
+                .description("숨소리가 거칠고 무기력함")
+                .pet(pet4.get())
+                .vet(vet1.get())
+                .build();
+
+        VisitRequestDto.CREATE create7 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 7, 28))
+                .description("예방접종")
+                .pet(pet5.get())
+                .vet(vet2.get())
+                .build();
+
+        VisitRequestDto.CREATE create8 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 10, 5))
+                .description("돌에 긁혀 피가남")
+                .pet(pet5.get())
+                .vet(vet1.get())
+                .build();
+
+        VisitRequestDto.CREATE create9 = VisitRequestDto.CREATE.builder()
+                .visitDate(LocalDate.of(2023, 9, 14))
+                .description("무기력함과 눈꼽이 자주낌")
+                .pet(pet6.get())
+                .vet(vet2.get())
+                .build();
+
+        visitService.createVisit(create1);
+        visitService.createVisit(create2);
+        visitService.createVisit(create3);
+        visitService.createVisit(create4);
+        visitService.createVisit(create5);
+        visitService.createVisit(create6);
+        visitService.createVisit(create7);
+        visitService.createVisit(create8);
+        visitService.createVisit(create9);
 
     }
 

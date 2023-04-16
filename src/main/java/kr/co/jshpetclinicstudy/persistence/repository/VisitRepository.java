@@ -26,4 +26,9 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
             "where v.pet.owner.id=:ownerId")
     List<Visit> findVisitsByOwnerId(Long ownerId);
 
+    @Query("select v " +
+            "from Visit v " +
+            "where v.vet.id=:vetId")
+    List<Visit> findVisitsByVetId(Long vetId);
+
 }
