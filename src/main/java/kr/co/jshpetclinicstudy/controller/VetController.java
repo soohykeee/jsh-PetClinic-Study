@@ -31,7 +31,6 @@ public class VetController {
         } catch (RuntimeException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
         }
-
     }
 
     /**

@@ -10,9 +10,14 @@ import java.util.Optional;
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
 
-    @Query(value = "select o.owner_id, o.address, o.city, o.first_name, o.last_name, o.telephone " +
+    /*@Query(value = "select o.owner_id, o.address, o.city, o.first_name, o.last_name, o.telephone " +
             "from tbl_owners o " +
             "where o.telephone=:telephone", nativeQuery = true)
     Optional<Owner> findOwnerByTelephone(String telephone);
+*/
 
+    @Query("select o " +
+            "from Owner o " +
+            "where o.telephone=:telephone ")
+    Optional<Owner> findOwnerByTelephone(String telephone);
 }

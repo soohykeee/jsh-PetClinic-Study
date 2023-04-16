@@ -55,15 +55,15 @@ public class PetController {
     }
 
     /**
-     * Read(Get) PetList Of Owner API
+     * Read(Get) Pets Of Owner API
      *
      * @param ownerId
      * @return
      */
-    @GetMapping("/owner/{owner_id}")
-    public ResponseFormat<List<PetResponseDto.READ>> getPetListOfOwner(@PathVariable(name = "owner_id") Long ownerId) {
+    @GetMapping("/owners/{owner_id}")
+    public ResponseFormat<List<PetResponseDto.READ>> getPetsByOwner(@PathVariable(name = "owner_id") Long ownerId) {
         try {
-            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, petService.getPetListOfOwner(ownerId));
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, petService.getPetsByOwner(ownerId));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {

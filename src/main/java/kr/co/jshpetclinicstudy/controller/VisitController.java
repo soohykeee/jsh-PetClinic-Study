@@ -37,7 +37,6 @@ public class VisitController {
         }
     }
 
-
     /**
      * Read(Get) Visit API
      *
@@ -56,15 +55,32 @@ public class VisitController {
     }
 
     /**
-     * Read(Get) VisitList Of Pet API
+     * Read(Get) Visits Of Pet API
      *
      * @param petId
      * @return
      */
     @GetMapping("/pets/{pet_id}")
-    public ResponseFormat<List<VisitResponseDto.READ>> getVisitListOfPet(@PathVariable(name = "pet_id") Long petId) {
+    public ResponseFormat<List<VisitResponseDto.READ>> getVisitsByPet(@PathVariable(name = "pet_id") Long petId) {
         try {
-            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitListOfPet(petId));
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByPet(petId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * Read(Get) Visits Of Owner API
+     *
+     * @param ownerId
+     * @return
+     */
+    @GetMapping("/owners/{owner_id}")
+    public ResponseFormat<List<VisitResponseDto.READ>> getVisitsByOwner(@PathVariable(name = "owner_id") Long ownerId) {
+        try {
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByOwner(ownerId));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {

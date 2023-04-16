@@ -22,13 +22,15 @@ public class VisitResponseDto {
 
         private String description;
 
-        private Pet pet;
-
         private String petName;
 
         private String petType;
 
+        private String petBirthDate;
+
         private String ownerFirstName;
+
+        private String ownerTelephone;
     }
 
 }

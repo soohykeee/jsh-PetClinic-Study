@@ -41,9 +41,21 @@ public class VisitService {
     }
 
     @Transactional
-    public List<VisitResponseDto.READ> getVisitListOfPet(Long petId) {
-        return visitRepository.findVisitListByPetId(petId).stream()
-                .map(visitMapper::toReadDto).collect(Collectors.toList());
+    public List<VisitResponseDto.READ> getVisitsByPet(Long petId) {
+        return visitRepository
+                .findVisitsByPetId(petId)
+                .stream()
+                .map(visitMapper::toReadDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<VisitResponseDto.READ> getVisitsByOwner(Long ownerId) {
+        return visitRepository
+                .findVisitsByOwnerId(ownerId)
+                .stream()
+                .map(visitMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional

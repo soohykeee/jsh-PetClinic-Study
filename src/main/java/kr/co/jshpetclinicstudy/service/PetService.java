@@ -42,9 +42,12 @@ public class PetService {
     }
 
     @Transactional
-    public List<PetResponseDto.READ> getPetListOfOwner(Long ownerId) {
-        return petRepository.findPetListByOwnerId(ownerId).stream()
-                .map(petMapper::toReadDto).collect(Collectors.toList());
+    public List<PetResponseDto.READ> getPetsByOwner(Long ownerId) {
+        return petRepository
+                .findPetsByOwnerId(ownerId)
+                .stream()
+                .map(petMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
