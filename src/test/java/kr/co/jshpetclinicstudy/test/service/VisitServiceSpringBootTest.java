@@ -1,9 +1,10 @@
-package kr.co.jshpetclinicstudy.service;
+package kr.co.jshpetclinicstudy.test.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.entity.Visit;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VisitRepository;
+import kr.co.jshpetclinicstudy.service.VisitService;
 import kr.co.jshpetclinicstudy.service.model.request.VisitRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VisitResponseDto;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class VisitServiceTest {
+class VisitServiceSpringBootTest {
 
     @Autowired
     private VisitService visitService;
@@ -58,7 +59,7 @@ class VisitServiceTest {
 
     @Test
     void getVisitListOfPet() {
-        List<VisitResponseDto.READ> visitListOfPet = visitService.getVisitListOfPet(2L);
+        List<VisitResponseDto.READ> visitListOfPet = visitService.getVisitsByPet(2L);
 
         assertThat(visitListOfPet.size()).isEqualTo(1);
     }

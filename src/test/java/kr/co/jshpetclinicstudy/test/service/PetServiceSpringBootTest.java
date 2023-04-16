@@ -1,9 +1,10 @@
-package kr.co.jshpetclinicstudy.service;
+package kr.co.jshpetclinicstudy.test.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
+import kr.co.jshpetclinicstudy.service.PetService;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.PetResponseDto;
 import org.junit.jupiter.api.Test;
@@ -17,7 +18,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class PetServiceTest {
+class PetServiceSpringBootTest {
 
     @Autowired
     private PetService petService;
@@ -59,7 +60,7 @@ class PetServiceTest {
 
     @Test
     void getPetListOfOwner() {
-        List<PetResponseDto.READ> petListOfOwner = petService.getPetListOfOwner(2L);
+        List<PetResponseDto.READ> petListOfOwner = petService.getPetsByOwner(2L);
 
         assertThat(petListOfOwner.get(0).getName()).isEqualTo("멍멍이");
         assertThat(petListOfOwner.size()).isEqualTo(1);

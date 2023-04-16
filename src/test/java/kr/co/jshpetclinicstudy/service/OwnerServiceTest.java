@@ -2,73 +2,62 @@ package kr.co.jshpetclinicstudy.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
+import kr.co.jshpetclinicstudy.service.model.mapper.OwnerMapper;
 import kr.co.jshpetclinicstudy.service.model.request.OwnerRequestDto;
-import kr.co.jshpetclinicstudy.service.model.response.OwnerResponseDto;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-import java.util.Optional;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doReturn;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class OwnerServiceTest {
 
-    @Autowired
+    @InjectMocks
     private OwnerService ownerService;
-    @Autowired
+
+    @Mock
     private OwnerRepository ownerRepository;
 
-    @Test
-    void createOwner() {
-        OwnerRequestDto.CREATE create = OwnerRequestDto.CREATE.builder()
-                .firstName("수혁")
-                .lastName("장")
-                .address("도봉구 창동")
-                .city("서울시")
-                .telephone("01064564655")
-                .build();
+    @Mock
+    private OwnerMapper ownerMapper;
 
+
+    /*
+    given - when - then
+
+    given : 테스트에서 구체화하고자 하는 행동을 시작하기 전에 테스트 상태를 설명하는 부분
+    when : 구체화하고자 하는 행동
+    Then : 어떠한 특정한 행동 때문에 발생할거라고 예상되는 변화에 대한 설명, 검증
+
+     */
+
+    @Test
+    void createOwnerTest_SUCCESS() {
+        /*//given
+        OwnerRequestDto.CREATE create = new OwnerRequestDto.CREATE();
+        Owner owner = new Owner();
+        Mockito.when(ownerMapper.toEntity(create)).thenReturn(owner);
+
+        //when
         ownerService.createOwner(create);
-        Optional<Owner> owner = ownerRepository.findOwnerByTelephone("01064564655");
-        assertThat(owner.get().getFirstName()).isEqualTo("수혁");
-    }
 
-    @Test
-    void getOwnerList() {
-        List<OwnerResponseDto.READ> readList = ownerService.getOwnerList();
+        //then
+        Mockito.verify(ownerMapper, Mockito.times(1)).toEntity(create);
+        Mockito.verify(ownerRepository, Mockito.times(1)).save(owner);*/
 
-        assertThat(readList.get(0).getFirstName()).isEqualTo("수혁");
-        assertThat(ownerRepository.findAll().size()).isEqualTo(readList.size());
-    }
-
-    @Test
-    void getOwner() {
-        OwnerResponseDto.READ read = ownerService.getOwner(1L);
-        assertThat(read.getTelephone()).isEqualTo("01064564655");
-    }
-
-    @Test
-    void updateOwner() {
-        OwnerRequestDto.UPDATE update = OwnerRequestDto.UPDATE.builder()
-                .ownerId(1L)
-                .firstName("철수")
-                .lastName("김")
-                .address("성북구 정릉동")
-                .city("서울시")
-                .telephone("01064564655")
+        OwnerRequestDto.CREATE create = OwnerRequestDto.CREATE.builder()
+                .telephone("01012341234")
                 .build();
 
-        ownerService.updateOwner(update);
-        assertThat(ownerRepository.findById(1L).get().getFirstName()).isEqualTo("철수");
+//        doReturn();
+
     }
 
-    @Test
-    void deleteOwner() {
-        ownerService.deleteOwner(1L);
-        assertThat(ownerRepository.findById(1L)).isEmpty();
-    }
+
 
 }

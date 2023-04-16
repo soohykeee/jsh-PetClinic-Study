@@ -1,7 +1,8 @@
-package kr.co.jshpetclinicstudy.service;
+package kr.co.jshpetclinicstudy.test.service;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.repository.VetRepository;
+import kr.co.jshpetclinicstudy.service.VetService;
 import kr.co.jshpetclinicstudy.service.model.request.VetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetResponseDto;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class VetServiceTest {
+class VetServiceSpringBootTest {
 
     @Autowired
     private VetService vetService;
