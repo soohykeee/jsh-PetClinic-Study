@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,11 @@ import java.util.List;
 public class Vet extends BaseEntity{
 
     @Column(name = "first_name", length = 30)
+    @NotNull
     private String firstName;
 
     @Column(name = "last_name", length = 30)
+    @NotNull
     private String lastName;
 
     @OneToMany(

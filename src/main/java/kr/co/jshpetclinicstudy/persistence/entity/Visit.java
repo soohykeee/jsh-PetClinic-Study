@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,11 @@ import java.time.LocalDate;
 public class Visit extends BaseEntity{
 
     @Column(name = "visit_date")
+    @NotNull
     private LocalDate visitDate;
 
     @Column(name = "description")
+    @NotNull
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

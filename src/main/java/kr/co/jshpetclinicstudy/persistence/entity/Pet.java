@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +16,11 @@ import java.time.LocalDate;
 public class Pet extends BaseEntity{
 
     @Column(name = "name", length = 30)
+    @NotNull
     private String name;
 
     @Column(name = "birth_date")
+    @NotNull
     private LocalDate birthDate;
 
     @ManyToOne(fetch = FetchType.LAZY)

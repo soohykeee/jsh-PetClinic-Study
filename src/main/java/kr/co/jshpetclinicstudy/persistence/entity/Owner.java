@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,18 +14,23 @@ import lombok.NoArgsConstructor;
 public class Owner extends BaseEntity {
 
     @Column(name = "first_name", length = 30)
+    @NotNull
     private String firstName;
 
     @Column(name = "last_name", length = 30)
+    @NotNull
     private String lastName;
 
     @Column(name = "address")
+    @NotNull
     private String address;
 
     @Column(name = "city", length = 80)
+    @NotNull
     private String city;
 
     @Column(name = "telephone", length = 20, unique = true)
+    @NotNull
     private String telephone;
 
     @Builder
