@@ -82,7 +82,9 @@ public class VetService {
     }
 
     private List<String> getSpecialtiesNameByVet(Vet vet) {
-        return vet.getVetSpecialties().stream()
+        return vet
+                .getVetSpecialties()
+                .stream()
                 .map(VetSpecialty::getSpecialty)
                 .map(Specialty::getSpecialtyName)
                 .collect(Collectors.toList());

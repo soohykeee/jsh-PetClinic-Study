@@ -1,6 +1,9 @@
 package kr.co.jshpetclinicstudy.service;
 
 import jakarta.transaction.Transactional;
+import kr.co.jshpetclinicstudy.infra.exception.DuplicatedException;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.OwnerMapper;
@@ -24,18 +27,21 @@ public class OwnerService {
     @Transactional
     public void createOwner(OwnerRequestDto.CREATE create) {
         final Owner owner = ownerMapper.toEntity(create);
+        isTelephone(create.getTelephone());
         ownerRepository.save(owner);
     }
 
     public List<OwnerResponseDto.READ> getOwnerList() {
-        return ownerRepository.findAll().stream()
-                .map(ownerMapper::toReadDto).collect(Collectors.toList());
+        return ownerRepository
+                .findAll()
+                .stream()
+                .map(ownerMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     public OwnerResponseDto.READ getOwner(Long id) {
         final Optional<Owner> owner = ownerRepository.findById(id);
         isOwner(owner);
-
         return ownerMapper.toReadDto(owner.get());
     }
 
@@ -62,8 +68,13 @@ public class OwnerService {
 
     private void isOwner(Optional<Owner> owner) {
         if (owner.isEmpty()) {
-            throw new RuntimeException("This Owner is Not Exist");
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
         }
     }
 
+    private void isTelephone(String telephone) {
+        if (ownerRepository.existsByTelephone(telephone))
+            throw new DuplicatedException(ResponseStatus.FAIL_TELEPHONE_DUPLICATED);
+    }
 }
+

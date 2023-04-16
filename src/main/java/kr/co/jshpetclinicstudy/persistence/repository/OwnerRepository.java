@@ -20,4 +20,6 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
             "from Owner o " +
             "where o.telephone=:telephone ")
     Optional<Owner> findOwnerByTelephone(String telephone);
+
+    boolean existsByTelephone(String telephone);
 }

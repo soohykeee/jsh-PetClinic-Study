@@ -30,8 +30,11 @@ public class PetService {
 
     @Transactional
     public List<PetResponseDto.READ> getPetList() {
-        return petRepository.findAll().stream()
-                .map(petMapper::toReadDto).collect(Collectors.toList());
+        return petRepository
+                .findAll()
+                .stream()
+                .map(petMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional
