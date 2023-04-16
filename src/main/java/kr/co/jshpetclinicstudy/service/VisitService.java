@@ -59,6 +59,15 @@ public class VisitService {
     }
 
     @Transactional
+    public List<VisitResponseDto.READ> getVisitsByVet(Long vetId) {
+        return visitRepository
+                .findVisitsByVetId(vetId)
+                .stream()
+                .map(visitMapper::toReadDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
     public void updateVisit(VisitRequestDto.UPDATE update) {
         final Optional<Visit> visit = visitRepository.findById(update.getVisitId());
         isVisit(visit);

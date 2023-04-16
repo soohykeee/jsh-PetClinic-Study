@@ -89,6 +89,23 @@ public class VisitController {
     }
 
     /**
+     * Read(Get) Visits Of Vet API
+     *
+     * @param vetId
+     * @return
+     */
+    @GetMapping("/vets/{vet_id}")
+    public ResponseFormat<List<VisitResponseDto.READ>> getVisitsByVet(@PathVariable(name = "vet_id") Long vetId) {
+        try {
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByVet(vetId));
+        } catch (NotFoundException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+        } catch (RuntimeException e) {
+            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+        }
+    }
+
+    /**
      * Update Visit API
      *
      * @param update

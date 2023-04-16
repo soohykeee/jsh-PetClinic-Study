@@ -31,6 +31,8 @@ public class VisitResponseDto {
         private String ownerFirstName;
 
         private String ownerTelephone;
+
+        private String vetFistName;
     }
 
 }

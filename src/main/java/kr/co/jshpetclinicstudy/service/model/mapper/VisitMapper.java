@@ -17,5 +17,6 @@ public interface VisitMapper {
     @Mapping(target = "petBirthDate", source = "pet.birthDate")
     @Mapping(target = "ownerFirstName", source = "pet.owner.firstName")
     @Mapping(target = "ownerTelephone", source = "pet.owner.telephone")
+    @Mapping(target = "vetFistName", source="vet.firstName")
     VisitResponseDto.READ toReadDto(Visit visit);
 }
