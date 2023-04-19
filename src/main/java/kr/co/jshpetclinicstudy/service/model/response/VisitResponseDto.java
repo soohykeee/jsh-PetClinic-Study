@@ -1,6 +1,5 @@
 package kr.co.jshpetclinicstudy.service.model.response;
 
-import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

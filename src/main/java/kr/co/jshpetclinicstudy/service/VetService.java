@@ -53,6 +53,8 @@ public class VetService {
         return vetMapper.toReadDto(vet.get(), specialtiesName);
     }
 
+    // return type - List<Specialty> 로 하였다가, PostMan 을 통해 조회 시, 데이터를 확인하기엔 불편한 요소가 있기에
+    // Set<String> 을 사용하여 모든 전문학위를 보기에 더 좋게 수정
     public Set<String> getSpecialties() {
         List<Specialty> specialties = specialtyRepository.findAll();
 

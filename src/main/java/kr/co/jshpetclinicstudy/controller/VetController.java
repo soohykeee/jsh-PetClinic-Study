@@ -4,14 +4,12 @@ import jakarta.validation.Valid;
 import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
-import kr.co.jshpetclinicstudy.persistence.entity.Specialty;
 import kr.co.jshpetclinicstudy.service.VetService;
 import kr.co.jshpetclinicstudy.service.model.request.VetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
