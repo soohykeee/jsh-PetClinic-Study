@@ -1,8 +1,12 @@
 package kr.co.jshpetclinicstudy.service;
 
 import jakarta.transaction.Transactional;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
+import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.entity.Type;
+import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.PetMapper;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
@@ -20,11 +24,15 @@ public class PetService {
 
     private final PetRepository petRepository;
 
+    private final OwnerRepository ownerRepository;
+
     private final PetMapper petMapper;
 
     @Transactional
     public void createPet(PetRequestDto.CREATE create) {
-        final Pet pet = petMapper.toEntity(create);
+        Optional<Owner> owner = ownerRepository.findById(create.getOwnerId());
+        isOwner(owner);
+        final Pet pet = petMapper.toEntity(create, owner.get());
         petRepository.save(pet);
     }
 
@@ -74,7 +82,13 @@ public class PetService {
 
     private void isPet(Optional<Pet> pet) {
         if (pet.isEmpty()) {
-            throw new RuntimeException("This Pet is Not Exist");
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
+        }
+    }
+
+    private void isOwner(Optional<Owner> owner) {
+        if (owner.isEmpty()) {
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
         }
     }
 

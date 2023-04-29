@@ -21,9 +21,13 @@ public class VisitRequestDto {
 
         private String description;
 
-        private Pet pet;
+//        private Pet pet;
+//
+//        private Vet vet;
 
-        private Vet vet;
+        private Long petId;
+
+        private Long vetId;
     }
 
     @Getter
@@ -38,9 +42,13 @@ public class VisitRequestDto {
 
         private String description;
 
-        private Pet pet;
+//        private Pet pet;
+//
+//        private Vet vet;
 
-        private Vet vet;
+        private Long petId;
+
+        private Long vetId;
     }
 
 

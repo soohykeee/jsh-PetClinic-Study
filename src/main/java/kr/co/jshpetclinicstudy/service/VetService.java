@@ -1,6 +1,8 @@
 package kr.co.jshpetclinicstudy.service;
 
 import jakarta.transaction.Transactional;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.persistence.entity.Specialty;
 import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.entity.VetSpecialty;
@@ -128,7 +130,7 @@ public class VetService {
 
     private void isVet(Optional<Vet> vet) {
         if (vet.isEmpty()) {
-            throw new RuntimeException("This Vet is Not Exist");
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
         }
     }
 

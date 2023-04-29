@@ -20,7 +20,9 @@ public class PetRequestDto {
 
         private LocalDate birthDate;
 
-        private Owner owner;
+//        private Owner owner;
+
+        private Long ownerId;
 
         private String type;
     }
@@ -37,7 +39,9 @@ public class PetRequestDto {
 
         private LocalDate birthDate;
 
-        private Owner owner;
+//        private Owner owner;
+
+        private Long ownerId;
 
         private String type;
     }

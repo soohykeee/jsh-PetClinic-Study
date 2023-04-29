@@ -1,7 +1,13 @@
 package kr.co.jshpetclinicstudy.service;
 
 import jakarta.transaction.Transactional;
+import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
+import kr.co.jshpetclinicstudy.persistence.entity.Pet;
+import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.entity.Visit;
+import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.VetRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VisitRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.VisitMapper;
 import kr.co.jshpetclinicstudy.service.model.request.VisitRequestDto;
@@ -19,11 +25,20 @@ public class VisitService {
 
     private final VisitRepository visitRepository;
 
+    private final VetRepository vetRepository;
+
+    private final PetRepository petRepository;
+
     private final VisitMapper visitMapper;
 
     @Transactional
     public void createVisit(VisitRequestDto.CREATE create) {
-        final Visit visit = visitMapper.toEntity(create);
+        Optional<Pet> pet = petRepository.findById(create.getPetId());
+        isPet(pet);
+        Optional<Vet> vet = vetRepository.findById(create.getVetId());
+        isVet(vet);
+
+        final Visit visit = visitMapper.toEntity(create, pet.get(), vet.get());
         visitRepository.save(visit);
     }
 
@@ -74,7 +89,9 @@ public class VisitService {
 
         visit.get().changeVisitDate(update.getVisitDate());
         visit.get().changeVisitDescription(update.getDescription());
-        visit.get().changeVisitPet(update.getPet());
+        Optional<Pet> changePet = petRepository.findById(update.getPetId());
+        isPet(changePet);
+        visit.get().changeVisitPet(changePet.get());
 
         visitRepository.save(visit.get());
     }
@@ -88,7 +105,19 @@ public class VisitService {
 
     private void isVisit(Optional<Visit> visit) {
         if (visit.isEmpty()) {
-            throw new RuntimeException("This Visit is Not Exist");
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
+        }
+    }
+
+    private void isPet(Optional<Pet> pet) {
+        if (pet.isEmpty()) {
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
+        }
+    }
+
+    private void isVet(Optional<Vet> vet) {
+        if (vet.isEmpty()) {
+            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
         }
     }
 }

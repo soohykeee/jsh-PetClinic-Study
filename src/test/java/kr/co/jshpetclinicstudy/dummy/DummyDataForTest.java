@@ -100,7 +100,7 @@ public class DummyDataForTest {
         PetRequestDto.CREATE create1 = PetRequestDto.CREATE.builder()
                 .name("멍멍이푸들")
                 .birthDate(LocalDate.of(2021, 1, 9))
-                .owner(owner1.get())
+                .ownerId(owner1.get().getId())
                 .type(String.valueOf(Type.푸들))
                 .build();
 
@@ -108,14 +108,14 @@ public class DummyDataForTest {
         PetRequestDto.CREATE create2 = PetRequestDto.CREATE.builder()
                 .name("멍멍이시바")
                 .birthDate(LocalDate.of(2010, 11, 19))
-                .owner(owner2.get())
+                .ownerId(owner2.get().getId())
                 .type(String.valueOf(Type.시바))
                 .build();
 
         PetRequestDto.CREATE create3 = PetRequestDto.CREATE.builder()
                 .name("야옹이러시안블루")
                 .birthDate(LocalDate.of(2014, 8, 22))
-                .owner(owner2.get())
+                .ownerId(owner2.get().getId())
                 .type(String.valueOf(Type.러시안블루))
                 .build();
 
@@ -123,14 +123,14 @@ public class DummyDataForTest {
         PetRequestDto.CREATE create4 = PetRequestDto.CREATE.builder()
                 .name("엉금거북이")
                 .birthDate(LocalDate.of(2020, 3, 5))
-                .owner(owner3.get())
+                .ownerId(owner3.get().getId())
                 .type(String.valueOf(Type.거북이))
                 .build();
 
         PetRequestDto.CREATE create5 = PetRequestDto.CREATE.builder()
                 .name("찍찍햄스터")
                 .birthDate(LocalDate.of(2018, 12, 7))
-                .owner(owner3.get())
+                .ownerId(owner3.get().getId())
                 .type(String.valueOf(Type.햄스터))
                 .build();
 
@@ -138,7 +138,7 @@ public class DummyDataForTest {
         PetRequestDto.CREATE create6 = PetRequestDto.CREATE.builder()
                 .name("야옹이먼치킨")
                 .birthDate(LocalDate.of(2016, 11, 11))
-                .owner(owner4.get())
+                .ownerId(owner4.get().getId())
                 .type(String.valueOf(Type.먼치킨))
                 .build();
 
@@ -206,64 +206,64 @@ public class DummyDataForTest {
         VisitRequestDto.CREATE create1 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 10, 12))
                 .description("건강검진")
-                .pet(pet1.get())
-                .vet(vet1.get())
+                .petId(pet1.get().getId())
+                .vetId(vet1.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create2 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 11, 22))
                 .description("예방접종")
-                .pet(pet1.get())
-                .vet(vet1.get())
+                .petId(pet1.get().getId())
+                .vetId(vet1.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create3 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 5, 10))
                 .description("건강검진 및 예방접종")
-                .pet(pet2.get())
-                .vet(vet2.get())
+                .petId(pet2.get().getId())
+                .vetId(vet2.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create4 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 12, 2))
                 .description("복통 호소 및 구토")
-                .pet(pet3.get())
-                .vet(vet3.get())
+                .petId(pet3.get().getId())
+                .vetId(vet3.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create5 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2022, 5, 17))
                 .description("앞발 절뚝거림")
-                .pet(pet3.get())
-                .vet(vet3.get())
+                .petId(pet3.get().getId())
+                .vetId(vet3.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create6 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 1, 14))
                 .description("숨소리가 거칠고 무기력함")
-                .pet(pet4.get())
-                .vet(vet1.get())
+                .petId(pet4.get().getId())
+                .vetId(vet1.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create7 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 7, 28))
                 .description("예방접종")
-                .pet(pet5.get())
-                .vet(vet2.get())
+                .petId(pet5.get().getId())
+                .vetId(vet2.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create8 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 10, 5))
                 .description("돌에 긁혀 피가남")
-                .pet(pet5.get())
-                .vet(vet1.get())
+                .petId(pet5.get().getId())
+                .vetId(vet1.get().getId())
                 .build();
 
         VisitRequestDto.CREATE create9 = VisitRequestDto.CREATE.builder()
                 .visitDate(LocalDate.of(2023, 9, 14))
                 .description("무기력함과 눈꼽이 자주낌")
-                .pet(pet6.get())
-                .vet(vet2.get())
+                .petId(pet6.get().getId())
+                .vetId(vet2.get().getId())
                 .build();
 
         visitService.createVisit(create1);
