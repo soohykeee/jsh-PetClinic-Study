@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 public class OwnerRequestDto {
 
     @Getter
@@ -39,5 +41,19 @@ public class OwnerRequestDto {
         private String city;
 
         private String telephone;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CONDITION {
+
+        private List<Long> ownerIds;
+
+        private String firstName;
+
+        private String telephone;
+
     }
 }

@@ -1,13 +1,12 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
-import kr.co.jshpetclinicstudy.persistence.entity.Pet;
-import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class VisitRequestDto {
 
@@ -20,10 +19,6 @@ public class VisitRequestDto {
         private LocalDate visitDate;
 
         private String description;
-
-//        private Pet pet;
-//
-//        private Vet vet;
 
         private Long petId;
 
@@ -42,14 +37,23 @@ public class VisitRequestDto {
 
         private String description;
 
-//        private Pet pet;
-//
-//        private Vet vet;
-
         private Long petId;
 
         private Long vetId;
     }
 
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CONDITION {
+
+        private List<Long> visitIds;
+
+        private LocalDate startDate;
+
+        private LocalDate endDate;
+
+    }
 
 }

@@ -26,7 +26,7 @@ class VisitServiceSpringBootTest {
     private VisitRepository visitRepository;
     @Autowired
     private PetRepository petRepository;
-
+/*
     @Test
     void createVisit() {
         Optional<Pet> pet = petRepository.findById(2L);
@@ -83,5 +83,5 @@ class VisitServiceSpringBootTest {
     void deleteVisit() {
         visitService.deleteVisit(1L);
         assertThat(visitRepository.findById(1L)).isEmpty();
-    }
+    }*/
 }

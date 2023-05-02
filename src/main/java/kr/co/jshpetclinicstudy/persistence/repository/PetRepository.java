@@ -13,14 +13,9 @@ import java.util.Optional;
 @Repository
 public interface PetRepository extends JpaRepository<Pet, Long> {
 
-    /*@Query(value = "select p.pet_id, p.name, p.birth_date, p.pet_type, p.owner_id " +
-            "from tbl_pets p " +
-            "where p.owner_id=:ownerId", nativeQuery = true)
-    List<Pet> findPetListByOwnerId(Long ownerId);
-*/
-
     @Query("select p " +
             "from Pet p " +
+            "join fetch p.owner " +
             "where p.owner.id=:ownerId")
     List<Pet> findPetsByOwnerId(Long ownerId);
 

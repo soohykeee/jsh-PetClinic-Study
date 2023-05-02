@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class VetRequestDto {
@@ -35,6 +36,17 @@ public class VetRequestDto {
         private String lastName;
 
         private List<String> specialtiesName;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CONDITION {
+
+        private List<Long> vetIds;
+
+        private String firstName;
 
     }
 }
