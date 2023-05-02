@@ -1,12 +1,12 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
-import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PetRequestDto {
 
@@ -19,8 +19,6 @@ public class PetRequestDto {
         private String name;
 
         private LocalDate birthDate;
-
-//        private Owner owner;
 
         private Long ownerId;
 
@@ -39,10 +37,22 @@ public class PetRequestDto {
 
         private LocalDate birthDate;
 
-//        private Owner owner;
-
         private Long ownerId;
 
         private String type;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CONDITION {
+
+        private List<Long> petIds;
+
+        private String name;
+
+        private LocalDate birthDate;
+
     }
 }
