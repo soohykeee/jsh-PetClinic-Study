@@ -2,6 +2,8 @@ package kr.co.jshpetclinicstudy.persistence.repository.search;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import kr.co.jshpetclinicstudy.persistence.entity.QPet;
+import kr.co.jshpetclinicstudy.persistence.entity.QVet;
 import kr.co.jshpetclinicstudy.persistence.entity.QVisit;
 import kr.co.jshpetclinicstudy.persistence.entity.Visit;
 import kr.co.jshpetclinicstudy.service.model.request.VisitRequestDto;
@@ -21,9 +23,15 @@ public class VisitSearchRepository {
 
     private final QVisit visit = QVisit.visit;
 
+    private final QPet pet = QPet.pet;
+
+    private final QVet vet = QVet.vet;
+
     public List<Visit> find(VisitRequestDto.CONDITION condition) {
         return queryFactory
                 .selectFrom(visit)
+                .join(pet).fetchJoin()
+                .join(vet).fetchJoin()
                 .where(
                         visitIdIn(condition.getVisitIds()),
                         visitDateBetween(condition.getStartDate(), condition.getEndDate())

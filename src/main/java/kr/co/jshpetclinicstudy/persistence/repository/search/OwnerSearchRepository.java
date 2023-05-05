@@ -26,6 +26,7 @@ public class OwnerSearchRepository {
                 .where(
                         ownerIdIn(condition.getOwnerIds()),
                         ownerFirstNameEq(condition.getFirstName()),
+                        ownerCityContain(condition.getCity()),
                         ownerTelephoneEq(condition.getTelephone())
                 )
                 .fetch();
@@ -45,6 +46,14 @@ public class OwnerSearchRepository {
         }
 
         return owner.firstName.eq(firstName);
+    }
+
+    private BooleanExpression ownerCityContain(String city) {
+        if (!StringUtils.hasText(city)) {
+            return null;
+        }
+
+        return owner.city.contains(city);
     }
 
     private BooleanExpression ownerTelephoneEq(String telephone) {

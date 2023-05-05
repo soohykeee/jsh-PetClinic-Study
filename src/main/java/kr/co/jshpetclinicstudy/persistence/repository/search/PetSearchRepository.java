@@ -3,7 +3,9 @@ package kr.co.jshpetclinicstudy.persistence.repository.search;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
+import kr.co.jshpetclinicstudy.persistence.entity.QOwner;
 import kr.co.jshpetclinicstudy.persistence.entity.QPet;
+import kr.co.jshpetclinicstudy.persistence.entity.Type;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,13 +23,17 @@ public class PetSearchRepository {
 
     private final QPet pet = QPet.pet;
 
+    private final QOwner owner = QOwner.owner;
+
     public List<Pet> find(PetRequestDto.CONDITION condition) {
         return queryFactory
                 .selectFrom(pet)
+                .join(owner).fetchJoin()
                 .where(
                         petIdIn(condition.getPetIds()),
                         petNameEq(condition.getName()),
-                        petBirthDateEq(condition.getBirthDate())
+                        petBirthDateEq(condition.getBirthDate()),
+                        petTypeEq(condition.getType())
                 )
                 .fetch();
     }
@@ -56,5 +62,12 @@ public class PetSearchRepository {
         return pet.birthDate.eq(birthDate);
     }
 
+    private BooleanExpression petTypeEq(String type) {
+        if (!StringUtils.hasText(type)) {
+            return null;
+        }
+
+        return pet.type.eq(Type.valueOf(type));
+    }
 
 }

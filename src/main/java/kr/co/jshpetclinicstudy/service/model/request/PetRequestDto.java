@@ -54,5 +54,7 @@ public class PetRequestDto {
 
         private LocalDate birthDate;
 
+        private String type;
+
     }
 }
