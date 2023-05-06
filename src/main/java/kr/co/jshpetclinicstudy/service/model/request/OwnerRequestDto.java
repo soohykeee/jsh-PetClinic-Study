@@ -53,6 +53,8 @@ public class OwnerRequestDto {
 
         private String firstName;
 
+        private String city;
+
         private String telephone;
 
     }

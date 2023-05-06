@@ -48,5 +48,7 @@ public class VetRequestDto {
 
         private String firstName;
 
+        private String specialtyName;
+
     }
 }
