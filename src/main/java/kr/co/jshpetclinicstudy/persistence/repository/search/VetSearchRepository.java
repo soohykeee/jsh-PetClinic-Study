@@ -36,7 +36,7 @@ public class VetSearchRepository {
                 )
                 .fetch();
     }
-
+/*
     public List<Vet> findBySpecialty(VetRequestDto.CONDITION condition) {
         return queryFactory
                 .selectFrom(vet)
@@ -46,7 +46,7 @@ public class VetSearchRepository {
                         vetSpecialtyNameEq(condition.getSpecialtyName())
                 )
                 .fetch();
-    }
+    }*/
 
     private BooleanExpression vetIdIn(List<Long> vetIds) {
         if (CollectionUtils.isEmpty(vetIds)) {

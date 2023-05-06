@@ -48,9 +48,12 @@ public class VisitSearchRepository {
     }
 
     private BooleanExpression visitDateBetween(LocalDate startDate, LocalDate endDate) {
-        if (!StringUtils.hasText(startDate.toString()) && !StringUtils.hasText(endDate.toString())) {
+        if (startDate == null && endDate == null) {
             return null;
         }
+//        if (!StringUtils.hasText(startDate.toString()) && !StringUtils.hasText(endDate.toString())) {
+//            return null;
+//        }
 
         return visit.visitDate.between(startDate, endDate);
     }

@@ -55,9 +55,13 @@ public class PetSearchRepository {
     }
 
     private BooleanExpression petBirthDateEq(LocalDate birthDate) {
-        if (!StringUtils.hasText(birthDate.toString())) {
+        if (birthDate == null) {
             return null;
         }
+
+//        if (!StringUtils.hasText(birthDate.toString())) {
+//            return null;
+//        }
 
         return pet.birthDate.eq(birthDate);
     }
