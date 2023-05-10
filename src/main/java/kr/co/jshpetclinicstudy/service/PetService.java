@@ -8,6 +8,7 @@ import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.entity.Type;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.search.PetSearchRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.PetMapper;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.PetResponseDto;
@@ -26,6 +27,8 @@ public class PetService {
 
     private final OwnerRepository ownerRepository;
 
+    private final PetSearchRepository petSearchRepository;
+
     private final PetMapper petMapper;
 
     @Transactional
@@ -36,20 +39,28 @@ public class PetService {
         petRepository.save(pet);
     }
 
-    @Transactional
-    public List<PetResponseDto.READ> getPetList() {
-        return petRepository
-                .findAll()
-                .stream()
+//    @Transactional
+//    public List<PetResponseDto.READ> getPetList() {
+//        return petRepository
+//                .findAll()
+//                .stream()
+//                .map(petMapper::toReadDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Transactional
+//    public PetResponseDto.READ getPet(Long id) {
+//        final Optional<Pet> pet = petRepository.findById(id);
+//        isPet(pet);
+//        return petMapper.toReadDto(pet.get());
+//    }
+
+    public List<PetResponseDto.READ> getPetsByCondition(PetRequestDto.CONDITION condition) {
+        final List<Pet> pets = petSearchRepository.find(condition);
+
+        return pets.stream()
                 .map(petMapper::toReadDto)
                 .collect(Collectors.toList());
-    }
-
-    @Transactional
-    public PetResponseDto.READ getPet(Long id) {
-        final Optional<Pet> pet = petRepository.findById(id);
-        isPet(pet);
-        return petMapper.toReadDto(pet.get());
     }
 
     @Transactional
