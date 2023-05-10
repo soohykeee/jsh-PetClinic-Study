@@ -11,6 +11,8 @@ import kr.co.jshpetclinicstudy.service.model.response.OwnerResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/owners")
@@ -36,16 +38,33 @@ public class OwnerController {
         }
     }
 
+//    /**
+//     * Read(Get) Owner API
+//     *
+//     * @param ownerId
+//     * @return
+//     */
+//    @GetMapping("/{owner_id}")
+//    public ResponseFormat<OwnerResponseDto.READ> getOwner(@PathVariable(name = "owner_id") Long ownerId) {
+//        try {
+//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwner(ownerId));
+//        } catch (NotFoundException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+//        } catch (RuntimeException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+//        }
+//    }
+
     /**
      * Read(Get) Owner API
      *
-     * @param ownerId
+     * @param condition
      * @return
      */
-    @GetMapping("/{owner_id}")
-    public ResponseFormat<OwnerResponseDto.READ> getOwner(@PathVariable(name = "owner_id") Long ownerId) {
+    @PostMapping("/search")
+    public ResponseFormat<List<OwnerResponseDto.READ>> getOwnersByCondition(@RequestBody @Valid OwnerRequestDto.CONDITION condition) {
         try {
-            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwner(ownerId));
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwnersByCondition(condition));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {

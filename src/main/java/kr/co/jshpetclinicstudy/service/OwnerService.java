@@ -6,6 +6,7 @@ import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.search.OwnerSearchRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.OwnerMapper;
 import kr.co.jshpetclinicstudy.service.model.request.OwnerRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.OwnerResponseDto;
@@ -22,6 +23,8 @@ public class OwnerService {
 
     private final OwnerRepository ownerRepository;
 
+    private final OwnerSearchRepository ownerSearchRepository;
+
     private final OwnerMapper ownerMapper;
 
     @Transactional
@@ -31,18 +34,27 @@ public class OwnerService {
         ownerRepository.save(owner);
     }
 
-    public List<OwnerResponseDto.READ> getOwnerList() {
-        return ownerRepository
-                .findAll()
-                .stream()
+//    public List<OwnerResponseDto.READ> getOwnerList() {
+//        return ownerRepository
+//                .findAll()
+//                .stream()
+//                .map(ownerMapper::toReadDto)
+//                .collect(Collectors.toList());
+//    }
+//
+//    public OwnerResponseDto.READ getOwner(Long id) {
+//        final Optional<Owner> owner = ownerRepository.findById(id);
+//        isOwner(owner);
+//        return ownerMapper.toReadDto(owner.get());
+//    }
+
+    // QueryDSL 을 사용하는 방식으로 수정
+    public List<OwnerResponseDto.READ> getOwnersByCondition(OwnerRequestDto.CONDITION condition) {
+        final List<Owner> owners = ownerSearchRepository.find(condition);
+
+        return owners.stream()
                 .map(ownerMapper::toReadDto)
                 .collect(Collectors.toList());
-    }
-
-    public OwnerResponseDto.READ getOwner(Long id) {
-        final Optional<Owner> owner = ownerRepository.findById(id);
-        isOwner(owner);
-        return ownerMapper.toReadDto(owner.get());
     }
 
     @Transactional
