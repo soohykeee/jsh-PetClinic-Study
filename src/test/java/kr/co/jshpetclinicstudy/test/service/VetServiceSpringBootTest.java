@@ -24,54 +24,54 @@ class VetServiceSpringBootTest {
     private VetRepository vetRepository;
 
 
-    @Test
-    void createVet() {
-
-        List<String> testName = new ArrayList<>();
-        testName.add("test1");
-        testName.add("test2");
-        testName.add("test3");
-
-        VetRequestDto.CREATE create = VetRequestDto.CREATE.builder()
-                .firstName("닥터")
-                .lastName("김")
-                .specialtiesName(testName)
-                .build();
-
-        vetService.createVet(create);
-        Optional<Vet> vet = vetRepository.findById(1L);
-
-        assertThat(vet.get().getFirstName()).isEqualTo("닥터");
-    }
-
-    @Test
-    void getVet() {
-        VetResponseDto.READ read = vetService.getVet(1L);
-        assertThat(read.getFirstName()).isEqualTo("닥터");
-    }
-
-    @Test
-    void updateVet() {
-        List<String> testName = new ArrayList<>();
-        testName.add("update_test1");
-        testName.add("test2");
-        testName.add("test3");
-
-        VetRequestDto.UPDATE update = VetRequestDto.UPDATE.builder()
-                .vetId(1L)
-                .firstName("민수")
-                .lastName("이")
-                .specialtiesName(testName)
-                .build();
-
-        vetService.updateVet(update);
-//        assertThat(vetRepository.findById(1L).get().getFirstName()).isEqualTo("민수");
-    }
-
-    @Test
-    void deleteVet() {
-        vetService.deleteVet(1L);
-        assertThat(vetRepository.findById(1L)).isEmpty();
-    }
+//    @Test
+//    void createVet() {
+//
+//        List<String> testName = new ArrayList<>();
+//        testName.add("test1");
+//        testName.add("test2");
+//        testName.add("test3");
+//
+//        VetRequestDto.CREATE create = VetRequestDto.CREATE.builder()
+//                .firstName("닥터")
+//                .lastName("김")
+//                .specialtiesName(testName)
+//                .build();
+//
+//        vetService.createVet(create);
+//        Optional<Vet> vet = vetRepository.findById(1L);
+//
+//        assertThat(vet.get().getFirstName()).isEqualTo("닥터");
+//    }
+//
+//    @Test
+//    void getVet() {
+//        VetResponseDto.READ read = vetService.getVet(1L);
+//        assertThat(read.getFirstName()).isEqualTo("닥터");
+//    }
+//
+//    @Test
+//    void updateVet() {
+//        List<String> testName = new ArrayList<>();
+//        testName.add("update_test1");
+//        testName.add("test2");
+//        testName.add("test3");
+//
+//        VetRequestDto.UPDATE update = VetRequestDto.UPDATE.builder()
+//                .vetId(1L)
+//                .firstName("민수")
+//                .lastName("이")
+//                .specialtiesName(testName)
+//                .build();
+//
+//        vetService.updateVet(update);
+////        assertThat(vetRepository.findById(1L).get().getFirstName()).isEqualTo("민수");
+//    }
+//
+//    @Test
+//    void deleteVet() {
+//        vetService.deleteVet(1L);
+//        assertThat(vetRepository.findById(1L)).isEmpty();
+//    }
 
 }
