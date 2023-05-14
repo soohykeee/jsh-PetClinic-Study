@@ -9,6 +9,7 @@ import kr.co.jshpetclinicstudy.persistence.entity.Visit;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VetRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VisitRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.search.VisitSearchRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.VisitMapper;
 import kr.co.jshpetclinicstudy.service.model.request.VisitRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VisitResponseDto;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 public class VisitService {
 
     private final VisitRepository visitRepository;
+
+    private final VisitSearchRepository visitSearchRepository;
 
     private final VetRepository vetRepository;
 
@@ -42,17 +45,25 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
-    @Transactional
-    public List<VisitResponseDto.READ> getVisitList() {
-        return visitRepository.findAll().stream()
-                .map(visitMapper::toReadDto).collect(Collectors.toList());
-    }
+//    @Transactional
+//    public List<VisitResponseDto.READ> getVisitList() {
+//        return visitRepository.findAll().stream()
+//                .map(visitMapper::toReadDto).collect(Collectors.toList());
+//    }
+//
+//    @Transactional
+//    public VisitResponseDto.READ getVisit(Long id) {
+//        final Optional<Visit> visit = visitRepository.findById(id);
+//        isVisit(visit);
+//        return visitMapper.toReadDto(visit.get());
+//    }
 
-    @Transactional
-    public VisitResponseDto.READ getVisit(Long id) {
-        final Optional<Visit> visit = visitRepository.findById(id);
-        isVisit(visit);
-        return visitMapper.toReadDto(visit.get());
+    public List<VisitResponseDto.READ> getVisitsByCondition(VisitRequestDto.CONDITION condition) {
+        final List<Visit> visits = visitSearchRepository.find(condition);
+
+        return visits.stream()
+                .map(visitMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     @Transactional

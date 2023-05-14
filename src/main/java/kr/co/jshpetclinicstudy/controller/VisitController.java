@@ -37,16 +37,33 @@ public class VisitController {
         }
     }
 
+//    /**
+//     * Read(Get) Visit API
+//     *
+//     * @param visitId
+//     * @return
+//     */
+//    @GetMapping("/{visit_id}")
+//    public ResponseFormat<VisitResponseDto.READ> getVisit(@PathVariable(name = "visit_id") Long visitId) {
+//        try {
+//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisit(visitId));
+//        } catch (NotFoundException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+//        } catch (RuntimeException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+//        }
+//    }
+
     /**
      * Read(Get) Visit API
      *
-     * @param visitId
+     * @param condition
      * @return
      */
-    @GetMapping("/{visit_id}")
-    public ResponseFormat<VisitResponseDto.READ> getVisit(@PathVariable(name = "visit_id") Long visitId) {
+    @PostMapping("/search")
+    public ResponseFormat<List<VisitResponseDto.READ>> getVisitsByCondition(@RequestBody @Valid VisitRequestDto.CONDITION condition) {
         try {
-            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisit(visitId));
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByCondition(condition));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {
