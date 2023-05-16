@@ -10,6 +10,7 @@ import kr.co.jshpetclinicstudy.service.model.response.VetResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -35,16 +36,33 @@ public class VetController {
         }
     }
 
+//    /**
+//     * Get Vet API
+//     *
+//     * @param vetId
+//     * @return
+//     */
+//    @GetMapping("/{vet_id}")
+//    public ResponseFormat<VetResponseDto.READ> getVet(@PathVariable(name = "vet_id") Long vetId) {
+//        try {
+//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVet(vetId));
+//        } catch (NotFoundException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
+//        } catch (RuntimeException e) {
+//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
+//        }
+//    }
+
     /**
      * Get Vet API
      *
-     * @param vetId
+     * @param condition
      * @return
      */
-    @GetMapping("/{vet_id}")
-    public ResponseFormat<VetResponseDto.READ> getVet(@PathVariable(name = "vet_id") Long vetId) {
+    @PostMapping("/search")
+    public ResponseFormat<List<VetResponseDto.READ>> getVetsByCondition(@RequestBody @Valid VetRequestDto.CONDITION condition) {
         try {
-            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVet(vetId));
+            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVetsByCondition(condition));
         } catch (NotFoundException e) {
             return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
         } catch (RuntimeException e) {

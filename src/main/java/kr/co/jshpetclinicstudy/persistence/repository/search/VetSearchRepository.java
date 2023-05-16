@@ -28,7 +28,10 @@ public class VetSearchRepository {
 
     public List<Vet> find(VetRequestDto.CONDITION condition) {
         return queryFactory
-                .selectFrom(vet)
+                .selectDistinct(vet)
+                .from(vet)
+                .join(vetSpecialty).fetchJoin()
+                .join(specialty).fetchJoin()
                 .where(
                         vetIdIn(condition.getVetIds()),
                         vetFirstNameEq(condition.getFirstName()),
