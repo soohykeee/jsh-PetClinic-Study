@@ -8,25 +8,27 @@ import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.entity.VetSpecialty;
 import kr.co.jshpetclinicstudy.persistence.repository.SpecialtyRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.VetRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.search.VetSearchRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.SpecialtyMapper;
 import kr.co.jshpetclinicstudy.service.model.mapper.VetMapper;
 import kr.co.jshpetclinicstudy.service.model.mapper.VetSpecialtyMapper;
 import kr.co.jshpetclinicstudy.service.model.request.VetRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.VetResponseDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class VetService {
 
     private final VetRepository vetRepository;
+
+    private final VetSearchRepository vetSearchRepository;
 
     private final SpecialtyRepository specialtyRepository;
 
@@ -46,13 +48,24 @@ public class VetService {
         vetRepository.save(vet);
     }
 
-    @Transactional
-    public VetResponseDto.READ getVet(Long id) {
-        final Optional<Vet> vet = vetRepository.findById(id);
-        isVet(vet);
-        final List<String> specialtiesName = getSpecialtiesNameByVet(vet.get());
+//    @Transactional
+//    public VetResponseDto.READ getVet(Long id) {
+//        final Optional<Vet> vet = vetRepository.findById(id);
+//        isVet(vet);
+//        final List<String> specialtiesName = getSpecialtiesNameByVet(vet.get());
+//
+//        return vetMapper.toReadDto(vet.get(), specialtiesName);
+//    }
 
-        return vetMapper.toReadDto(vet.get(), specialtiesName);
+    public List<VetResponseDto.READ> getVetsByCondition(VetRequestDto.CONDITION condition) {
+        List<VetResponseDto.READ> tempList = new ArrayList<>();
+        List<Vet> vets = vetSearchRepository.find(condition);
+
+        for (int i = 0; i < vets.size(); i++) {
+            tempList.add(vetMapper.toReadDto(vets.get(i), getSpecialtiesNameByVet(vets.get(i))));
+        }
+
+        return tempList;
     }
 
     // return type - List<Specialty> 로 하였다가, PostMan 을 통해 조회 시, 데이터를 확인하기엔 불편한 요소가 있기에
