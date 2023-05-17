@@ -33,7 +33,8 @@ public class PetSearchRepository {
                         petIdIn(condition.getPetIds()),
                         petNameEq(condition.getName()),
                         petBirthDateEq(condition.getBirthDate()),
-                        petTypeEq(condition.getType())
+                        petTypeEq(condition.getType()),
+                        petOwnerFirstNameEq(condition.getOwnerFirstName())
                 )
                 .fetch();
     }
@@ -59,10 +60,6 @@ public class PetSearchRepository {
             return null;
         }
 
-//        if (!StringUtils.hasText(birthDate.toString())) {
-//            return null;
-//        }
-
         return pet.birthDate.eq(birthDate);
     }
 
@@ -72,6 +69,14 @@ public class PetSearchRepository {
         }
 
         return pet.type.eq(Type.valueOf(type));
+    }
+
+    private BooleanExpression petOwnerFirstNameEq(String ownerFirstName) {
+        if (!StringUtils.hasText(ownerFirstName)) {
+            return null;
+        }
+
+        return pet.owner.firstName.eq(ownerFirstName);
     }
 
 }

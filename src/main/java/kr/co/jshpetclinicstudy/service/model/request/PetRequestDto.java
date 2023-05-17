@@ -56,5 +56,7 @@ public class PetRequestDto {
 
         private String type;
 
+        private String ownerFirstName;
+
     }
 }

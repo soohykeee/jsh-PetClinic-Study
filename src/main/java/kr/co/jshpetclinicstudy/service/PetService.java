@@ -39,22 +39,6 @@ public class PetService {
         petRepository.save(pet);
     }
 
-//    @Transactional
-//    public List<PetResponseDto.READ> getPetList() {
-//        return petRepository
-//                .findAll()
-//                .stream()
-//                .map(petMapper::toReadDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    @Transactional
-//    public PetResponseDto.READ getPet(Long id) {
-//        final Optional<Pet> pet = petRepository.findById(id);
-//        isPet(pet);
-//        return petMapper.toReadDto(pet.get());
-//    }
-
     public List<PetResponseDto.READ> getPetsByCondition(PetRequestDto.CONDITION condition) {
         final List<Pet> pets = petSearchRepository.find(condition);
 
