@@ -38,23 +38,6 @@ public class OwnerController {
         }
     }
 
-//    /**
-//     * Read(Get) Owner API
-//     *
-//     * @param ownerId
-//     * @return
-//     */
-//    @GetMapping("/{owner_id}")
-//    public ResponseFormat<OwnerResponseDto.READ> getOwner(@PathVariable(name = "owner_id") Long ownerId) {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, ownerService.getOwner(ownerId));
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
-//    }
-
     /**
      * Read(Get) Owner API
      *

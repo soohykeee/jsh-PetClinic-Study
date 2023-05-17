@@ -36,23 +36,6 @@ public class VetController {
         }
     }
 
-//    /**
-//     * Get Vet API
-//     *
-//     * @param vetId
-//     * @return
-//     */
-//    @GetMapping("/{vet_id}")
-//    public ResponseFormat<VetResponseDto.READ> getVet(@PathVariable(name = "vet_id") Long vetId) {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVet(vetId));
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
-//    }
-
     /**
      * Get Vet API
      *

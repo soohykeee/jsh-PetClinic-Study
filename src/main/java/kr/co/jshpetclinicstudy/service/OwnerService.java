@@ -34,20 +34,6 @@ public class OwnerService {
         ownerRepository.save(owner);
     }
 
-//    public List<OwnerResponseDto.READ> getOwnerList() {
-//        return ownerRepository
-//                .findAll()
-//                .stream()
-//                .map(ownerMapper::toReadDto)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public OwnerResponseDto.READ getOwner(Long id) {
-//        final Optional<Owner> owner = ownerRepository.findById(id);
-//        isOwner(owner);
-//        return ownerMapper.toReadDto(owner.get());
-//    }
-
     // QueryDSL 을 사용하는 방식으로 수정
     public List<OwnerResponseDto.READ> getOwnersByCondition(OwnerRequestDto.CONDITION condition) {
         final List<Owner> owners = ownerSearchRepository.find(condition);

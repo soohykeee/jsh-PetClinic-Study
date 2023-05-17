@@ -45,19 +45,6 @@ public class VisitService {
         visitRepository.save(visit);
     }
 
-//    @Transactional
-//    public List<VisitResponseDto.READ> getVisitList() {
-//        return visitRepository.findAll().stream()
-//                .map(visitMapper::toReadDto).collect(Collectors.toList());
-//    }
-//
-//    @Transactional
-//    public VisitResponseDto.READ getVisit(Long id) {
-//        final Optional<Visit> visit = visitRepository.findById(id);
-//        isVisit(visit);
-//        return visitMapper.toReadDto(visit.get());
-//    }
-
     public List<VisitResponseDto.READ> getVisitsByCondition(VisitRequestDto.CONDITION condition) {
         final List<Visit> visits = visitSearchRepository.find(condition);
 

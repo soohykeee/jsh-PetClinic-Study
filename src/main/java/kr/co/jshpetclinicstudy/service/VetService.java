@@ -48,15 +48,6 @@ public class VetService {
         vetRepository.save(vet);
     }
 
-//    @Transactional
-//    public VetResponseDto.READ getVet(Long id) {
-//        final Optional<Vet> vet = vetRepository.findById(id);
-//        isVet(vet);
-//        final List<String> specialtiesName = getSpecialtiesNameByVet(vet.get());
-//
-//        return vetMapper.toReadDto(vet.get(), specialtiesName);
-//    }
-
     public List<VetResponseDto.READ> getVetsByCondition(VetRequestDto.CONDITION condition) {
         List<VetResponseDto.READ> tempList = new ArrayList<>();
         List<Vet> vets = vetSearchRepository.find(condition);
