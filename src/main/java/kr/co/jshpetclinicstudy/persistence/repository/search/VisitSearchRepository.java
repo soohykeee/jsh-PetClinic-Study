@@ -29,12 +29,16 @@ public class VisitSearchRepository {
 
     public List<Visit> find(VisitRequestDto.CONDITION condition) {
         return queryFactory
-                .selectFrom(visit)
+                .selectDistinct(visit)
+                .from(visit)
                 .join(pet).fetchJoin()
                 .join(vet).fetchJoin()
                 .where(
                         visitIdIn(condition.getVisitIds()),
-                        visitDateBetween(condition.getStartDate(), condition.getEndDate())
+                        visitDateBetween(condition.getStartDate(), condition.getEndDate()),
+                        visitOwnerFirstNameEq(condition.getOwnerFirstName()),
+                        visitPetNameEq(condition.getPetName()),
+                        visitVetFirstNameEq(condition.getVetFirstName())
                 )
                 .fetch();
     }
@@ -51,11 +55,32 @@ public class VisitSearchRepository {
         if (startDate == null && endDate == null) {
             return null;
         }
-//        if (!StringUtils.hasText(startDate.toString()) && !StringUtils.hasText(endDate.toString())) {
-//            return null;
-//        }
 
         return visit.visitDate.between(startDate, endDate);
+    }
+
+    private BooleanExpression visitOwnerFirstNameEq(String ownerFirstName) {
+        if (!StringUtils.hasText(ownerFirstName)) {
+            return null;
+        }
+
+        return visit.pet.owner.firstName.eq(ownerFirstName);
+    }
+
+    private BooleanExpression visitPetNameEq(String petName) {
+        if (!StringUtils.hasText(petName)) {
+            return null;
+        }
+
+        return visit.pet.name.eq(petName);
+    }
+
+    private BooleanExpression visitVetFirstNameEq(String vetFirstName) {
+        if (!StringUtils.hasText(vetFirstName)) {
+            return null;
+        }
+
+        return visit.vet.firstName.eq(vetFirstName);
     }
 
 }

@@ -54,6 +54,12 @@ public class VisitRequestDto {
 
         private LocalDate endDate;
 
+        private String ownerFirstName;
+
+        private String petName;
+
+        private String vetFirstName;
+
     }
 
 }
