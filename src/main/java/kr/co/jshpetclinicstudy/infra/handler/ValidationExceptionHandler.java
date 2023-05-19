@@ -19,21 +19,23 @@ public class ValidationExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ResponseErrorFormat> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
-        log.warn("-------HandleMethodArgumentNotValidException-------");
+        log.warn("-------HandleMethodArgumentNotValidException-------", e);
 
         final ResponseStatus responseStatus = ResponseStatus.FAIL_INVALID_PARAMETER;
 
         return handleExceptionInternal(e, responseStatus);
     }
 
-    private ResponseEntity<ResponseErrorFormat> handleExceptionInternal(final BindException e, final ResponseStatus responseStatus) {
+    private ResponseEntity<ResponseErrorFormat> handleExceptionInternal(final BindException e,
+                                                                        final ResponseStatus responseStatus) {
 
         return ResponseEntity
                 .status(responseStatus.getStatusCode())
                 .body(makeResponseErrorFormat(e, responseStatus));
     }
 
-    private ResponseErrorFormat makeResponseErrorFormat(final BindException e, final ResponseStatus responseStatus) {
+    private ResponseErrorFormat makeResponseErrorFormat(final BindException e,
+                                                        final ResponseStatus responseStatus) {
 
         final List<ResponseErrorFormat.ValidationException> validationExceptions = e.getBindingResult()
                 .getFieldErrors()
