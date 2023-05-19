@@ -30,7 +30,9 @@ public class OwnerService {
     @Transactional
     public void createOwner(OwnerRequestDto.CREATE create) {
         final Owner owner = ownerMapper.toEntity(create);
+
         isTelephone(create.getTelephone());
+
         ownerRepository.save(owner);
     }
 
@@ -46,6 +48,7 @@ public class OwnerService {
     @Transactional
     public void updateOwner(OwnerRequestDto.UPDATE update) {
         final Optional<Owner> owner = ownerRepository.findById(update.getOwnerId());
+
         isOwner(owner);
 
         owner.get().changeOwnerCity(update.getCity());
@@ -60,13 +63,15 @@ public class OwnerService {
     @Transactional
     public void deleteOwner(Long id) {
         final Optional<Owner> owner = ownerRepository.findById(id);
+
         isOwner(owner);
+
         ownerRepository.deleteById(id);
     }
 
     private void isOwner(Optional<Owner> owner) {
         if (owner.isEmpty()) {
-            throw new NotFoundException(ResponseStatus.FAIL_NOT_FOUND);
+            throw new NotFoundException(ResponseStatus.FAIL_OWNER_NOT_FOUND);
         }
     }
 
