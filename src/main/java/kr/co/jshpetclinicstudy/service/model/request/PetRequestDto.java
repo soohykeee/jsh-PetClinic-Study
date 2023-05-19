@@ -1,5 +1,6 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,12 +17,16 @@ public class PetRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
+        @NotBlank(message = "Please Enter Name")
         private String name;
 
+        @NotBlank(message = "Please Enter BirthDate")
         private LocalDate birthDate;
 
+        @NotBlank(message = "Please Enter OwnerId")
         private Long ownerId;
 
+        @NotBlank(message = "Please Enter PetType")
         private String type;
     }
 

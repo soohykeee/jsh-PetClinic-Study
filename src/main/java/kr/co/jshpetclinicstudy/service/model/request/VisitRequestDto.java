@@ -1,5 +1,6 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,12 +17,16 @@ public class VisitRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
+        @NotBlank(message = "Please Enter VisitDate")
         private LocalDate visitDate;
 
+        @NotBlank(message = "Please Enter Description")
         private String description;
 
+        @NotBlank(message = "Please Enter PetId")
         private Long petId;
 
+        @NotBlank(message = "Please Enter VetId")
         private Long vetId;
     }
 
