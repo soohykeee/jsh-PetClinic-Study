@@ -17,13 +17,10 @@ public class VetRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
-        @NotBlank(message = "Please Enter FirstName")
         private String firstName;
 
-        @NotBlank(message = "Please Enter LastName")
         private String lastName;
 
-        @NotBlank(message = "Please Enter Specialties")
         private List<String> specialtiesName;
     }
 

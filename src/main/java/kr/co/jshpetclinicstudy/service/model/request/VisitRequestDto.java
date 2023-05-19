@@ -17,16 +17,12 @@ public class VisitRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
-        @NotBlank(message = "Please Enter VisitDate")
         private LocalDate visitDate;
 
-        @NotBlank(message = "Please Enter Description")
         private String description;
 
-        @NotBlank(message = "Please Enter PetId")
         private Long petId;
 
-        @NotBlank(message = "Please Enter VetId")
         private Long vetId;
     }
 

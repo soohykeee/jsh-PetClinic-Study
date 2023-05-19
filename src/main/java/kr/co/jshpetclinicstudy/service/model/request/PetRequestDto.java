@@ -17,16 +17,12 @@ public class PetRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
-        @NotBlank(message = "Please Enter Name")
         private String name;
 
-        @NotBlank(message = "Please Enter BirthDate")
         private LocalDate birthDate;
 
-        @NotBlank(message = "Please Enter OwnerId")
         private Long ownerId;
 
-        @NotBlank(message = "Please Enter PetType")
         private String type;
     }
 

@@ -1,6 +1,7 @@
 package kr.co.jshpetclinicstudy.service.model.request;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,19 +17,14 @@ public class OwnerRequestDto {
     @NoArgsConstructor
     public static class CREATE {
 
-        @NotBlank(message = "Please Enter FirstName")
         private String firstName;
 
-        @NotBlank(message = "Please Enter LastName")
         private String lastName;
 
-        @NotBlank(message = "Please Enter Address")
         private String address;
 
-        @NotBlank(message = "Please Enter City")
         private String city;
 
-        @NotBlank(message = "Please Enter Telephone")
         private String telephone;
     }
 
