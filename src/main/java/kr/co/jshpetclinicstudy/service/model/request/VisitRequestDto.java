@@ -38,9 +38,6 @@ public class VisitRequestDto {
 
         private String description;
 
-        private Long petId;
-
-        private Long vetId;
     }
 
     @Getter

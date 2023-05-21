@@ -83,13 +83,10 @@ public class VisitService {
     @Transactional
     public void updateVisit(VisitRequestDto.UPDATE update) {
         final Optional<Visit> visit = visitRepository.findById(update.getVisitId());
+
         isVisit(visit);
 
-        visit.get().changeVisitDate(update.getVisitDate());
-        visit.get().changeVisitDescription(update.getDescription());
-        Optional<Pet> changePet = petRepository.findById(update.getPetId());
-        isPet(changePet);
-        visit.get().changeVisitPet(changePet.get());
+        visit.get().updateVisit(update);
 
         visitRepository.save(visit.get());
     }

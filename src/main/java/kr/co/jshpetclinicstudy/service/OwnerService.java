@@ -51,13 +51,10 @@ public class OwnerService {
 
         isOwner(owner);
 
-        owner.get().changeOwnerCity(update.getCity());
-        owner.get().changeOwnerAddress(update.getAddress());
-        owner.get().changeOwnerTelephone(update.getTelephone());
-        owner.get().changeOwnerFirstName(update.getFirstName());
-        owner.get().changeOwnerLastName(update.getLastName());
+        owner.get().updateOwner(update);
 
         ownerRepository.save(owner.get());
+
     }
 
     @Transactional

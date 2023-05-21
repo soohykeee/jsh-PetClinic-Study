@@ -2,6 +2,7 @@ package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import kr.co.jshpetclinicstudy.service.model.request.VisitRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,15 +43,9 @@ public class Visit extends BaseEntity{
         this.vet = vet;
     }
 
-    public void changeVisitDate(LocalDate changeVisitDate) {
-        this.visitDate = changeVisitDate;
+    public void updateVisit(VisitRequestDto.UPDATE update) {
+        this.visitDate = update.getVisitDate();
+        this.description = update.getDescription();
     }
 
-    public void changeVisitDescription(String changeDescription) {
-        this.description = changeDescription;
-    }
-
-    public void changeVisitPet(Pet changeVisitPet) {
-        this.pet = changeVisitPet;
-    }
 }

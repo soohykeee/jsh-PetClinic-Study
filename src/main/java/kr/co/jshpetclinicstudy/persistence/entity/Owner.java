@@ -2,6 +2,7 @@ package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import kr.co.jshpetclinicstudy.service.model.request.OwnerRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -46,23 +47,11 @@ public class Owner extends BaseEntity {
         this.telephone = telephone;
     }
 
-    public void changeOwnerAddress(String changeAddress) {
-        this.address = changeAddress;
-    }
-
-    public void changeOwnerCity(String changeCity) {
-        this.city = changeCity;
-    }
-
-    public void changeOwnerFirstName(String changeFirstName) {
-        this.firstName = changeFirstName;
-    }
-
-    public void changeOwnerLastName(String changeLastName) {
-        this.lastName = changeLastName;
-    }
-
-    public void changeOwnerTelephone(String changeOwnerTelephone) {
-        this.telephone = changeOwnerTelephone;
+    public void updateOwner(OwnerRequestDto.UPDATE update) {
+        this.address = update.getAddress();
+        this.city = update.getCity();
+        this.firstName = update.getFirstName();
+        this.lastName = update.getLastName();
+        this.telephone = update.getTelephone();
     }
 }

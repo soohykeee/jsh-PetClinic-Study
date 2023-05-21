@@ -74,8 +74,11 @@ public class VetService {
     @Transactional
     public void updateVet(VetRequestDto.UPDATE update) {
         final Optional<Vet> vet = vetRepository.findById(update.getVetId());
+
         isVet(vet);
+
         final List<VetSpecialty> vetSpecialties = getOrCreateVetSpecialties(update.getSpecialtiesName(), vet.get());
+
         vet.get().changeVetSpecialties(vetSpecialties);
 
         vetRepository.save(vet.get());

@@ -2,6 +2,7 @@ package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,16 +43,10 @@ public class Pet extends BaseEntity{
         this.type = type;
     }
 
-    public void changePetName(String changeName) {
-        this.name = changeName;
-    }
-
-    public void changePetBirtDate(LocalDate changeBirthDate) {
-        this.birthDate = changeBirthDate;
-    }
-
-    public void changePetType(Type changeType) {
-        this.type = changeType;
+    public void updatePet(PetRequestDto.UPDATE update) {
+        this.name = update.getName();
+        this.type = Type.valueOf(update.getType());
+        this.birthDate = update.getBirthDate();
     }
 
 }

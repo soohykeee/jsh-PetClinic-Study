@@ -59,11 +59,10 @@ public class PetService {
     @Transactional
     public void updatePet(PetRequestDto.UPDATE update) {
         final Optional<Pet> pet = petRepository.findById(update.getPetId());
+
         isPet(pet);
 
-        pet.get().changePetName(update.getName());
-        pet.get().changePetBirtDate(update.getBirthDate());
-        pet.get().changePetType(Type.valueOf(update.getType()));
+        pet.get().updatePet(update);
 
         petRepository.save(pet.get());
     }
