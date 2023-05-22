@@ -19,13 +19,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class PetServiceSpringBootTest {
-
-    @Autowired
-    private PetService petService;
-    @Autowired
-    private PetRepository petRepository;
-    @Autowired
-    private OwnerRepository ownerRepository;
+//
+//    @Autowired
+//    private PetService petService;
+//    @Autowired
+//    private PetRepository petRepository;
+//    @Autowired
+//    private OwnerRepository ownerRepository;
 /*
     @Test
     void createPet() {

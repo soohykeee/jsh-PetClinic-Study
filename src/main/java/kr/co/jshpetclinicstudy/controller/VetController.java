@@ -28,14 +28,8 @@ public class VetController {
      */
     @PostMapping
     public ResponseFormat<Void> createVet(@RequestBody @Valid VetRequestDto.CREATE create) {
-//        try {
-//            vetService.createVet(create);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
-
         vetService.createVet(create);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
 
     }
@@ -48,13 +42,6 @@ public class VetController {
      */
     @PostMapping("/search")
     public ResponseFormat<List<VetResponseDto.READ>> getVetsByCondition(@RequestBody @Valid VetRequestDto.CONDITION condition) {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVetsByCondition(condition));
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getVetsByCondition(condition));
     }
 
@@ -65,11 +52,6 @@ public class VetController {
      */
     @GetMapping("/specialties")
     public ResponseFormat<Set<String>> getSpecialties() {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getSpecialties());
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, vetService.getSpecialties());
     }
 
@@ -81,15 +63,8 @@ public class VetController {
      */
     @PutMapping
     public ResponseFormat<Void> updateVet(@RequestBody @Valid VetRequestDto.UPDATE update) {
-//        try {
-//            vetService.updateVet(update);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         vetService.updateVet(update);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 
@@ -101,15 +76,8 @@ public class VetController {
      */
     @DeleteMapping("/{vet_id}")
     public ResponseFormat<Void> deleteVet(@PathVariable(name = "vet_id") Long vetId) {
-//        try {
-//            vetService.deleteVet(vetId);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         vetService.deleteVet(vetId);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 

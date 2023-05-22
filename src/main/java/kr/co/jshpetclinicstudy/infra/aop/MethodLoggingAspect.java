@@ -51,14 +51,6 @@ public class MethodLoggingAspect {
             log.error("[EXCEPTION] {}-{} : {}", className, methodName, throwable.getMessage(), throwable);
             throw throwable;
         }
-
-//        Object result = joinPoint.proceed();
-//
-//        stopWatch.stop();
-//
-//        // [serviceTime] {className}-{methodName} : {~~}ms;
-//        log.info("[serviceTime] {}-{} : {}ms", className, methodName, stopWatch.getTotalTimeMillis());
-
         return result;
     }
 }

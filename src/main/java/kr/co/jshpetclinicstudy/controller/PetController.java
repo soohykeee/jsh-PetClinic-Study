@@ -27,15 +27,8 @@ public class PetController {
      */
     @PostMapping
     public ResponseFormat<Void> createPet(@RequestBody @Valid PetRequestDto.CREATE create) {
-//        try {
-//            petService.createPet(create);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         petService.createPet(create);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
     }
 
@@ -47,13 +40,6 @@ public class PetController {
      */
     @PostMapping("/search")
     public ResponseFormat<List<PetResponseDto.READ>> getPetsByCondition(@RequestBody @Valid PetRequestDto.CONDITION condition) {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, petService.getPetsByCondition(condition));
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, petService.getPetsByCondition(condition));
     }
 
@@ -65,15 +51,8 @@ public class PetController {
      */
     @PutMapping
     public ResponseFormat<Void> updatePet(@RequestBody @Valid PetRequestDto.UPDATE update) {
-//        try {
-//            petService.updatePet(update);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         petService.updatePet(update);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 
@@ -85,15 +64,8 @@ public class PetController {
      */
     @DeleteMapping("/{pet_id}")
     public ResponseFormat<Void> deletePet(@PathVariable(name = "pet_id") Long petId) {
-//        try {
-//            petService.deletePet(petId);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         petService.deletePet(petId);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 

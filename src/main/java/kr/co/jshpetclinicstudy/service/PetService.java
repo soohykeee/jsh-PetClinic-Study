@@ -48,15 +48,6 @@ public class PetService {
     }
 
     @Transactional
-    public List<PetResponseDto.READ> getPetsByOwner(Long ownerId) {
-        return petRepository
-                .findPetsByOwnerId(ownerId)
-                .stream()
-                .map(petMapper::toReadDto)
-                .collect(Collectors.toList());
-    }
-
-    @Transactional
     public void updatePet(PetRequestDto.UPDATE update) {
         final Optional<Pet> pet = petRepository.findById(update.getPetId());
 

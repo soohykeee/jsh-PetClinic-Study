@@ -20,12 +20,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class VisitServiceSpringBootTest {
 
-    @Autowired
-    private VisitService visitService;
-    @Autowired
-    private VisitRepository visitRepository;
-    @Autowired
-    private PetRepository petRepository;
+//    @Autowired
+//    private VisitService visitService;
+//    @Autowired
+//    private VisitRepository visitRepository;
+//    @Autowired
+//    private PetRepository petRepository;
 /*
     @Test
     void createVisit() {

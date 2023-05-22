@@ -17,10 +17,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class OwnerServiceSpringBootTest {
 
-    @Autowired
-    private OwnerService ownerService;
-    @Autowired
-    private OwnerRepository ownerRepository;
+//    @Autowired
+//    private OwnerService ownerService;
+//    @Autowired
+//    private OwnerRepository ownerRepository;
 
 //    @Test
 //    void createOwner() {

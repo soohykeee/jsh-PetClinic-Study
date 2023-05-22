@@ -18,11 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class VetServiceSpringBootTest {
 
-    @Autowired
-    private VetService vetService;
-    @Autowired
-    private VetRepository vetRepository;
-
+//    @Autowired
+//    private VetService vetService;
+//    @Autowired
+//    private VetRepository vetRepository;
+//
 
 //    @Test
 //    void createVet() {

@@ -27,15 +27,8 @@ public class VisitController {
      */
     @PostMapping
     public ResponseFormat<Void> createVisit(@RequestBody @Valid VisitRequestDto.CREATE create) {
-//        try {
-//            visitService.createVisit(create);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         visitService.createVisit(create);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_CREATE);
     }
 
@@ -47,13 +40,6 @@ public class VisitController {
      */
     @PostMapping("/search")
     public ResponseFormat<List<VisitResponseDto.READ>> getVisitsByCondition(@RequestBody @Valid VisitRequestDto.CONDITION condition) {
-//        try {
-//            return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByCondition(condition));
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, visitService.getVisitsByCondition(condition));
     }
 
@@ -65,16 +51,8 @@ public class VisitController {
      */
     @PutMapping
     public ResponseFormat<Void> updateVisit(@RequestBody @Valid VisitRequestDto.UPDATE update) {
-//        try {
-//            visitService.updateVisit(update);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
-
         visitService.updateVisit(update);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 
@@ -86,16 +64,8 @@ public class VisitController {
      */
     @DeleteMapping("/{visit_id}")
     public ResponseFormat<Void> deleteVisit(@PathVariable(name = "visit_id") Long visitId) {
-//        try {
-//            visitService.deleteVisit(visitId);
-//            return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
-//        } catch (NotFoundException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_NOT_FOUND);
-//        } catch (RuntimeException e) {
-//            return ResponseFormat.error(ResponseStatus.FAIL_BAD_REQUEST);
-//        }
-
         visitService.deleteVisit(visitId);
+
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
 }
