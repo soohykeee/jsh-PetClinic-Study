@@ -15,7 +15,8 @@ public class SecurityConfiguration {
 
         // jwt 사용을 해줄 것 이기에 csrf 비활성화
         http
-                .csrf().disable();
+                .csrf().disable()
+                .cors().disable();
 
         // Authorization (인가)
         http
@@ -25,7 +26,7 @@ public class SecurityConfiguration {
 
         // Authentication (인증)
         http
-                .formLogin().disable();
+                .formLogin();
 
         return http.build();
     }
