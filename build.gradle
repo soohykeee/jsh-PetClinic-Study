@@ -51,6 +51,9 @@ dependencies {
     // AOP
     implementation 'org.springframework.boot:spring-boot-starter-aop'
 
+    // Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
 }
 
 tasks.named('test') {
