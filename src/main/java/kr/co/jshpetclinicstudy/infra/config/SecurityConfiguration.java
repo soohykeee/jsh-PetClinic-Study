@@ -25,7 +25,7 @@ public class SecurityConfiguration {
 
         // Authentication (인증)
         http
-                .formLogin().disable();
+                .formLogin().permitAll();
 
         return http.build();
     }
