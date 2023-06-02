@@ -2,6 +2,7 @@ package kr.co.jshpetclinicstudy.persistence.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import kr.co.jshpetclinicstudy.persistence.entity.enums.Type;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import lombok.Builder;
 import lombok.Getter;

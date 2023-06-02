@@ -2,7 +2,7 @@ package kr.co.jshpetclinicstudy.dummy;
 
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
-import kr.co.jshpetclinicstudy.persistence.entity.Type;
+import kr.co.jshpetclinicstudy.persistence.entity.enums.Type;
 import kr.co.jshpetclinicstudy.persistence.entity.Vet;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
@@ -98,48 +98,48 @@ public class DummyDataForTest {
 
         // 주인 1
         PetRequestDto.CREATE create1 = PetRequestDto.CREATE.builder()
-                .name("멍멍이푸들")
+                .name("강아지푸들")
                 .birthDate(LocalDate.of(2021, 1, 9))
                 .ownerId(owner1.get().getId())
-                .type(String.valueOf(Type.푸들))
+                .type(String.valueOf(Type.DOG))
                 .build();
 
         // 주인 2
         PetRequestDto.CREATE create2 = PetRequestDto.CREATE.builder()
-                .name("멍멍이시바")
+                .name("강아지시바")
                 .birthDate(LocalDate.of(2010, 11, 19))
                 .ownerId(owner2.get().getId())
-                .type(String.valueOf(Type.시바))
+                .type(String.valueOf(Type.DOG))
                 .build();
 
         PetRequestDto.CREATE create3 = PetRequestDto.CREATE.builder()
-                .name("야옹이러시안블루")
+                .name("새앵무새")
                 .birthDate(LocalDate.of(2014, 8, 22))
                 .ownerId(owner2.get().getId())
-                .type(String.valueOf(Type.러시안블루))
+                .type(String.valueOf(Type.BIRD))
                 .build();
 
         // 주인 3
         PetRequestDto.CREATE create4 = PetRequestDto.CREATE.builder()
-                .name("엉금거북이")
+                .name("파충류도마뱀")
                 .birthDate(LocalDate.of(2020, 3, 5))
                 .ownerId(owner3.get().getId())
-                .type(String.valueOf(Type.거북이))
+                .type(String.valueOf(Type.REPTILE))
                 .build();
 
         PetRequestDto.CREATE create5 = PetRequestDto.CREATE.builder()
-                .name("찍찍햄스터")
+                .name("물고기키싱구라미")
                 .birthDate(LocalDate.of(2018, 12, 7))
                 .ownerId(owner3.get().getId())
-                .type(String.valueOf(Type.햄스터))
+                .type(String.valueOf(Type.FISH))
                 .build();
 
         // 주인 4
         PetRequestDto.CREATE create6 = PetRequestDto.CREATE.builder()
-                .name("야옹이먼치킨")
+                .name("고양이먼치킨")
                 .birthDate(LocalDate.of(2016, 11, 11))
                 .ownerId(owner4.get().getId())
-                .type(String.valueOf(Type.먼치킨))
+                .type(String.valueOf(Type.CAT))
                 .build();
 
         petService.createPet(create1);
@@ -192,12 +192,12 @@ public class DummyDataForTest {
 
     @Test
     void createVisit() {
-        Optional<Pet> pet1 = petRepository.findPetByName("멍멍이푸들");
-        Optional<Pet> pet2 = petRepository.findPetByName("멍멍이시바");
-        Optional<Pet> pet3 = petRepository.findPetByName("야옹이러시안블루");
-        Optional<Pet> pet4 = petRepository.findPetByName("엉금거북이");
-        Optional<Pet> pet5 = petRepository.findPetByName("찍찍햄스터");
-        Optional<Pet> pet6 = petRepository.findPetByName("야옹이먼치킨");
+        Optional<Pet> pet1 = petRepository.findPetByName("강아지푸들");
+        Optional<Pet> pet2 = petRepository.findPetByName("강아지시바");
+        Optional<Pet> pet3 = petRepository.findPetByName("새앵무새");
+        Optional<Pet> pet4 = petRepository.findPetByName("파충류도마뱀");
+        Optional<Pet> pet5 = petRepository.findPetByName("물고기키싱구라미");
+        Optional<Pet> pet6 = petRepository.findPetByName("고양이먼치킨");
 
         Optional<Vet> vet1 = vetRepository.findVetByFirstName("사부");
         Optional<Vet> vet2 = vetRepository.findVetByFirstName("국종");

@@ -5,7 +5,6 @@ import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.persistence.entity.Owner;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
-import kr.co.jshpetclinicstudy.persistence.entity.Type;
 import kr.co.jshpetclinicstudy.persistence.repository.OwnerRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.PetRepository;
 import kr.co.jshpetclinicstudy.persistence.repository.search.PetSearchRepository;
