@@ -31,8 +31,8 @@ public class VisitSearchRepository {
         return queryFactory
                 .selectDistinct(visit)
                 .from(visit)
-                .join(pet).fetchJoin()
-                .join(vet).fetchJoin()
+                .join(pet, visit.pet).fetchJoin()
+                .join(vet, visit.vet).fetchJoin()
                 .where(
                         visitIdIn(condition.getVisitIds()),
                         visitDateBetween(condition.getStartDate(), condition.getEndDate()),

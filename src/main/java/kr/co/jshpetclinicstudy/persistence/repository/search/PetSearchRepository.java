@@ -5,7 +5,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import kr.co.jshpetclinicstudy.persistence.entity.Pet;
 import kr.co.jshpetclinicstudy.persistence.entity.QOwner;
 import kr.co.jshpetclinicstudy.persistence.entity.QPet;
-import kr.co.jshpetclinicstudy.persistence.entity.Type;
+import kr.co.jshpetclinicstudy.persistence.entity.enums.Type;
 import kr.co.jshpetclinicstudy.service.model.request.PetRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -28,7 +28,7 @@ public class PetSearchRepository {
     public List<Pet> find(PetRequestDto.CONDITION condition) {
         return queryFactory
                 .selectFrom(pet)
-                .join(owner).fetchJoin()
+                .join(owner, pet.owner).fetchJoin()
                 .where(
                         petIdIn(condition.getPetIds()),
                         petNameEq(condition.getName()),
