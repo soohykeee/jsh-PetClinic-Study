@@ -18,9 +18,10 @@ public abstract class BaseEntity {
     protected Long id;
 
     @CreatedDate
+    @Column(name = "reg_date", nullable = false, updatable = false)
     private LocalDateTime regDate;
 
     @LastModifiedDate
+    @Column(name = "mod_date", nullable = false)
     private LocalDateTime modDate;
-
 }
