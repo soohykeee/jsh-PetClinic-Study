@@ -23,5 +23,4 @@ public class Specialty extends BaseEntity {
         this.specialtyName = specialtyName;
     }
 
-
 }
