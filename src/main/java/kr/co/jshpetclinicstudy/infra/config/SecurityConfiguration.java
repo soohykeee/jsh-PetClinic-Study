@@ -24,8 +24,10 @@ public class SecurityConfiguration {
         // Authorization (인가)
         http
                 .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
+                .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
+                .requestMatchers("/api/v1/members/admin/**").hasRole("ROLE_ADMIN")
+                .requestMatchers("/api/v1/members/**").hasRole("ROLE_USER")
+                .anyRequest().denyAll();
 
         // Authentication (인증)
         http
