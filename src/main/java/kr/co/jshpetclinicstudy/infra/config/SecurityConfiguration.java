@@ -1,5 +1,6 @@
 package kr.co.jshpetclinicstudy.infra.config;
 
+import kr.co.jshpetclinicstudy.persistence.entity.enums.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,8 +25,10 @@ public class SecurityConfiguration {
         // Authorization (인가)
         http
                 .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated();
+                .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
+                .requestMatchers("/api/v1/members/admin/**").hasRole(Role.ROLE_ADMIN.getUserRole())
+                .requestMatchers("/api/v1/members/**").hasRole(Role.ROLE_USER.getUserRole())
+                .anyRequest().denyAll();
 
         // Authentication (인증)
         http
