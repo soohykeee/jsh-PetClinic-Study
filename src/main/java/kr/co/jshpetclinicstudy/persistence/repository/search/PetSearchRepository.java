@@ -28,7 +28,7 @@ public class PetSearchRepository {
     public List<Pet> find(PetRequestDto.CONDITION condition) {
         return queryFactory
                 .selectFrom(pet)
-                .join(owner, pet.owner).fetchJoin()
+                .join(owner).fetchJoin()
                 .where(
                         petIdIn(condition.getPetIds()),
                         petNameEq(condition.getName()),
