@@ -3,6 +3,8 @@ package kr.co.jshpetclinicstudy.persistence.entity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import kr.co.jshpetclinicstudy.persistence.entity.enums.Role;
+import kr.co.jshpetclinicstudy.service.model.request.MemberRequestDto;
+import kr.co.jshpetclinicstudy.service.model.request.OwnerRequestDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,5 +41,10 @@ public class Member extends BaseEntity{
         this.identity = identity;
         this.password = password;
         this.role = role;
+    }
+
+    public void updateMember(MemberRequestDto.UPDATE update) {
+        this.name = update.getName();
+        this.role = Role.valueOf(update.getRole());
     }
 }

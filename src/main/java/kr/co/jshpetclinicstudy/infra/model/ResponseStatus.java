@@ -27,7 +27,10 @@ public enum ResponseStatus {
     FAIL_INVALID_PARAMETER("파라미터 값이 유효하지 않습니다.", HttpStatus.BAD_REQUEST),
 
     // Member Failed Status
-    FAIL_ROLE_NOT_FOUND("클라이언트가 요청한 소유자의 권한을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    FAIL_MEMBER_NOT_FOUND("클라이언트가 요청한 소유자를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    FAIL_MEMBER_ROLE_NOT_FOUND("클라이언트가 요청한 소유자의 권한을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
+    FAIL_MEMBER_IDENTITY_DUPLICATED("클라이언트가 요청한 아이디가 중복되었습니다.", HttpStatus.BAD_REQUEST),
+    FAIL_MEMBER_PASSWORD_NOT_MATCHED("클라이언트가 입력한 비밀번호가 소유자의 비밀번호와 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
 
     // Owner Failed Status
     FAIL_OWNER_NOT_FOUND("클라이언트가 요청한 소유자를 찾을 수 업습니다.", HttpStatus.NOT_FOUND),

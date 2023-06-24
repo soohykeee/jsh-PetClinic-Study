@@ -21,7 +21,7 @@ public enum Role {
 
         return Arrays.stream(Role.values())
                 .filter(role -> role.toString().equalsIgnoreCase(userRole))
-                .findAny().orElseThrow(() -> new NotFoundException(ResponseStatus.FAIL_ROLE_NOT_FOUND));
+                .findAny().orElseThrow(() -> new NotFoundException(ResponseStatus.FAIL_MEMBER_ROLE_NOT_FOUND));
     }
 
 }
