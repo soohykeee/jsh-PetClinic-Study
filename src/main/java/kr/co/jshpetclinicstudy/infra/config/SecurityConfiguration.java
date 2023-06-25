@@ -43,9 +43,9 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
-                .requestMatchers("/api/v1/members/admin/**").hasRole(Role.ROLE_ADMIN.getUserRole())
-                .requestMatchers("/api/v1/members/**").hasRole(Role.ROLE_USER.getUserRole())
-                .anyRequest().denyAll();
+                .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/members/**").hasRole("USER")
+                .anyRequest().permitAll();
 
         // Authentication (인증)
         http

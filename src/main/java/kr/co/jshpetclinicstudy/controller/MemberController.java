@@ -46,8 +46,13 @@ public class MemberController {
      * @param identity
      * @return
      */
-    @GetMapping("/members/{member_identity}")
-    public ResponseFormat<MemberResponseDto.READ> getMember(@PathVariable(name = "member_identity") String identity) {
+//    @GetMapping("/members/{member_identity}")
+//    public ResponseFormat<MemberResponseDto.READ> getMember(@PathVariable(name = "member_identity") String identity) {
+//        return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.readMember(identity));
+//    }
+
+    @GetMapping("/members/get")
+    public ResponseFormat<MemberResponseDto.READ> getMemberById(@RequestParam String identity) {
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.readMember(identity));
     }
 

@@ -29,7 +29,7 @@ public class Member extends BaseEntity{
     private String name;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "member_role")
+    @Column(name = "role")
     private Role role;
 
     @Builder

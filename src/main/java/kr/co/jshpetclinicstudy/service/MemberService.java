@@ -81,12 +81,21 @@ public class MemberService {
 //
 //    }
 
+    @Transactional
     public MemberResponseDto.READ readMember(String identity) {
         final Optional<Member> member = memberRepository.findMemberByIdentity(identity);
 
         isMember(member);
 
-        return memberMapper.toReadDto(member.get());
+        return MemberResponseDto.READ.builder()
+                .memberId(member.get().getId())
+                .identity(member.get().getIdentity())
+                .name(member.get().getName())
+                .role(String.valueOf(member.get().getRole()))
+//                .token(jwtProvider.createToken(member.get().getIdentity(), member.get().getRole().getUserRole()))
+                .build();
+
+//        return memberMapper.toReadDto(member.get());
     }
 
     private void isMember(Optional<Member> member) {
