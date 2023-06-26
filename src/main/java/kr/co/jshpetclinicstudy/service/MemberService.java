@@ -10,6 +10,7 @@ import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.persistence.entity.Member;
 import kr.co.jshpetclinicstudy.persistence.entity.enums.Role;
 import kr.co.jshpetclinicstudy.persistence.repository.MemberRepository;
+import kr.co.jshpetclinicstudy.persistence.repository.search.MemberSearchRepository;
 import kr.co.jshpetclinicstudy.service.model.mapper.MemberMapper;
 import kr.co.jshpetclinicstudy.service.model.request.MemberRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.MemberResponseDto;
@@ -17,13 +18,17 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
+
+    private final MemberSearchRepository memberSearchRepository;
 
     private final MemberMapper memberMapper;
 
@@ -33,7 +38,6 @@ public class MemberService {
 
     @Transactional
     public void createMember(MemberRequestDto.CREATE create) {
-//        final Member member = memberMapper.toEntity(create);
 
         Member member = Member.builder()
                 .identity(create.getIdentity())
@@ -62,7 +66,6 @@ public class MemberService {
                 .role(String.valueOf(member.get().getRole()))
                 .token(jwtProvider.createToken(member.get().getIdentity(), String.valueOf(member.get().getRole())))
                 .build();
-//        return memberMapper.toReadDto(member.get());
     }
 
     @Transactional
@@ -75,11 +78,6 @@ public class MemberService {
 
         memberRepository.save(member.get());
     }
-
-
-//    public List<MemberResponseDto.READ> getMembersByCondition(MemberRequestDto.CONDITION condition) {
-//
-//    }
 
     @Transactional
     public MemberResponseDto.READ readMember(String identity) {
@@ -94,8 +92,14 @@ public class MemberService {
                 .role(String.valueOf(member.get().getRole()))
 //                .token(jwtProvider.createToken(member.get().getIdentity(), member.get().getRole().getUserRole()))
                 .build();
+    }
 
-//        return memberMapper.toReadDto(member.get());
+    public List<MemberResponseDto.READ> getMembersByCondition(MemberRequestDto.CONDITION condition) {
+        final List<Member> members = memberSearchRepository.find(condition);
+
+        return members.stream()
+                .map(memberMapper::toReadDto)
+                .collect(Collectors.toList());
     }
 
     private void isMember(Optional<Member> member) {
@@ -113,7 +117,6 @@ public class MemberService {
     private void isPassword(String requestPassword, String getPassword) {
         if (!passwordEncoder.matches(requestPassword, getPassword)) {
             throw new WrongPasswordException(ResponseStatus.FAIL_MEMBER_PASSWORD_NOT_MATCHED);
-//            throw new BadCredentialsException("비밀번호를 확인해주세요.");
         }
     }
 }

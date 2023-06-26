@@ -9,6 +9,8 @@ import kr.co.jshpetclinicstudy.service.model.response.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
@@ -17,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
 
     /**
-     * Create Member
+     * Create Member API (회원가입)
      *
      * @param create
      * @return
@@ -30,7 +32,7 @@ public class MemberController {
     }
 
     /**
-     * Login Member
+     * Login Member API (로그인)
      *
      * @param login
      * @return
@@ -41,31 +43,41 @@ public class MemberController {
     }
 
     /**
-     * Get Member By Identity
+     * Get Member By Identity API
+     * ADMIN, USER 접근 가능
      *
      * @param identity
      * @return
      */
-//    @GetMapping("/members/{member_identity}")
-//    public ResponseFormat<MemberResponseDto.READ> getMember(@PathVariable(name = "member_identity") String identity) {
-//        return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.readMember(identity));
-//    }
-
     @GetMapping("/members/get")
-    public ResponseFormat<MemberResponseDto.READ> getMemberById(@RequestParam String identity) {
+    public ResponseFormat<MemberResponseDto.READ> getMember(@RequestParam String identity) {
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.readMember(identity));
     }
 
     /**
-     * Update Member
+     * Update Member API
+     * ADMIN, USER 접근 가능
      *
      * @param update
      * @return
      */
-    @PutMapping("/update")
+    @PutMapping("/members/update")
     public ResponseFormat<Void> updateMember(@RequestBody @Valid MemberRequestDto.UPDATE update) {
         memberService.updateMember(update);
 
         return ResponseFormat.success(ResponseStatus.SUCCESS_NO_CONTENT);
     }
+
+    /**
+     * Read(Get) Member API
+     * ADMIN 접근 가능
+     *
+     * @param condition
+     * @return
+     */
+    @PostMapping("/admin/search")
+    public ResponseFormat<List<MemberResponseDto.READ>> getMembersByCondition(@RequestBody @Valid MemberRequestDto.CONDITION condition) {
+        return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.getMembersByCondition(condition));
+    }
+
 }

@@ -1,6 +1,5 @@
 package kr.co.jshpetclinicstudy.service.model.mapper;
 
-import kr.co.jshpetclinicstudy.infra.jwt.JwtProvider;
 import kr.co.jshpetclinicstudy.persistence.entity.Member;
 import kr.co.jshpetclinicstudy.service.model.request.MemberRequestDto;
 import kr.co.jshpetclinicstudy.service.model.response.MemberResponseDto;
