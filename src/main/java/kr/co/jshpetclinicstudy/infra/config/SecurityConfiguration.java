@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import kr.co.jshpetclinicstudy.infra.jwt.JwtAuthenticationFilter;
 import kr.co.jshpetclinicstudy.infra.jwt.JwtProvider;
-import kr.co.jshpetclinicstudy.persistence.entity.enums.Role;
+import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,29 +44,27 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/v1/members/**").hasRole("USER")
+                .requestMatchers("/api/v1/members/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll();
 
         // Authentication (인증)
         http
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling()
+                // 권한 없을 때 오류 발생 - 요청한 경로의 USER_ROLE이 적합하지 않을 때
                 .accessDeniedHandler(new AccessDeniedHandler() {
                     @Override
                     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-                        response.setStatus(403);
-                        response.setCharacterEncoding("utf-8");
-                        response.setContentType("text/html; charset=UTF-8");
-                        response.getWriter().write("권한이 없는 사용자입니다.");
+                        response.setStatus(ResponseStatus.FAIL_FORBIDDEN.getStatusCode().value());
+                        response.getWriter().write(ResponseStatus.FAIL_FORBIDDEN.getMessage());
                     }
                 })
+                // 인증이 올바르지 않을 때 오류 발생 - token 오류
                 .authenticationEntryPoint(new AuthenticationEntryPoint() {
                     @Override
                     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-                        response.setStatus(401);
-                        response.setCharacterEncoding("utf-8");
-                        response.setContentType("text/html; charset=UTF-8");
-                        response.getWriter().write("인증되지 않은 사용자입니다.");
+                        response.setStatus(ResponseStatus.FAIL_UNAUTHORIZED.getStatusCode().value());
+                        response.getWriter().write(ResponseStatus.FAIL_UNAUTHORIZED.getMessage());;
                     }
                 });
 
