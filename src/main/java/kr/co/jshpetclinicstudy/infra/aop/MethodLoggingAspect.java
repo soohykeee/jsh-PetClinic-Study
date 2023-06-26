@@ -29,8 +29,12 @@ public class MethodLoggingAspect {
     private void visitService() {
 
     }
+    @Pointcut("execution(* kr.co.jshpetclinicstudy.service.MemberService.*(..))")
+    private void memberService() {
 
-    @Around("ownerService() || petService() || vetService() || visitService()")
+    }
+
+    @Around("ownerService() || petService() || vetService() || visitService() || memberService()")
     public Object logServiceTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String className = joinPoint.getTarget().getClass().getSimpleName();

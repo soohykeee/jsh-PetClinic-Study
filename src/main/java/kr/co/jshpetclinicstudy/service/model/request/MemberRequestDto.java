@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 public class MemberRequestDto {
 
     @Getter
@@ -45,6 +47,19 @@ public class MemberRequestDto {
         private String identity;
 
         private String password;
+    }
+
+    @Getter
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class CONDITION {
+
+        private List<Long> memberIds;
+
+        private String name;
+
+        private String role;
     }
 
 }
