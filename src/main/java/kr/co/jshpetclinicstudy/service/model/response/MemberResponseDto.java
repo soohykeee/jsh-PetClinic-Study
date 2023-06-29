@@ -1,5 +1,6 @@
 package kr.co.jshpetclinicstudy.service.model.response;
 
+import kr.co.jshpetclinicstudy.service.model.request.TokenDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,6 @@ public class MemberResponseDto {
 
         private String role;
 
-        private String token;
+        private TokenDto token;
     }
 }
