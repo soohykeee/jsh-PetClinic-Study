@@ -26,11 +26,18 @@ public enum ResponseStatus {
     // Valid Failed Status
     FAIL_INVALID_PARAMETER("파라미터 값이 유효하지 않습니다.", HttpStatus.BAD_REQUEST),
 
+    // Login Failed Status
+    FAIL_LOGIN_NOT_SUCCESS("로그인이 되지 않았습니다. 재시도 해주세요.", HttpStatus.BAD_REQUEST),
+
     // Member Failed Status
     FAIL_MEMBER_NOT_FOUND("클라이언트가 요청한 소유자를 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     FAIL_MEMBER_ROLE_NOT_FOUND("클라이언트가 요청한 소유자의 권한을 찾을 수 없습니다.", HttpStatus.NOT_FOUND),
     FAIL_MEMBER_IDENTITY_DUPLICATED("클라이언트가 요청한 아이디가 중복되었습니다.", HttpStatus.BAD_REQUEST),
     FAIL_MEMBER_PASSWORD_NOT_MATCHED("클라이언트가 입력한 비밀번호가 소유자의 비밀번호와 일치하지 않습니다.", HttpStatus.BAD_REQUEST),
+
+    // Token Failed Status
+    FAIL_TOKEN_NOT_FOUND("클라이언트가 요청한 토큰 정보를 찾을 수 업습니다.", HttpStatus.NOT_FOUND),
+    FAIL_REFRESHTOKEN_NOT_FOUND("클라이언트가 요청한 RefreshToken을 찾을 수 없습니다.(만료)", HttpStatus.NOT_FOUND),
 
     // Owner Failed Status
     FAIL_OWNER_NOT_FOUND("클라이언트가 요청한 소유자를 찾을 수 업습니다.", HttpStatus.NOT_FOUND),
