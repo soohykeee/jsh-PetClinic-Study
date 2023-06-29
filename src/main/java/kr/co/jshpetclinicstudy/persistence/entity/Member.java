@@ -32,6 +32,9 @@ public class Member extends BaseEntity{
     @Column(name = "role")
     private Role role;
 
+    @Column(name = "refresh_token")
+    private String refreshToken;
+
     @Builder
     public Member(String name,
                   String identity,
@@ -46,5 +49,9 @@ public class Member extends BaseEntity{
     public void updateMember(MemberRequestDto.UPDATE update) {
         this.name = update.getName();
         this.role = Role.valueOf(update.getRole());
+    }
+
+    public void setRefreshToken(String refreshToken) {
+        this.refreshToken = refreshToken;
     }
 }

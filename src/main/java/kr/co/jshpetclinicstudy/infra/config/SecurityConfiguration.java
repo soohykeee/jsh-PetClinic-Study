@@ -42,7 +42,7 @@ public class SecurityConfiguration {
         // Authorization (인가)
         http
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/register", "/api/v1/login").permitAll()
+                .requestMatchers("/api/v1/register", "/api/v1/login", "api/v1/refresh").permitAll()
                 .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/v1/members/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll();

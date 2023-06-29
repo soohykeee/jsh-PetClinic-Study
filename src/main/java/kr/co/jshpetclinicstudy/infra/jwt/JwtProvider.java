@@ -1,9 +1,6 @@
 package kr.co.jshpetclinicstudy.infra.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,7 +26,8 @@ public class JwtProvider {
     private Key secretKey;
 
     // 만료시간 1hour
-    private final Long exp = 1000L * 60 * 60;
+//    private final Long exp = 1000L * 60 * 60;
+    private final Long exp = 1000L * 60;
 
     private final JpaUserDetailsService userDetailsService;
 
@@ -60,6 +58,22 @@ public class JwtProvider {
 
     // Token 에 담겨있는 유저 Identity get
     public String getIdentity(String token) {
+
+        try {
+            Jwts
+                    .parserBuilder()
+                    .setSigningKey(secretKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody()
+                    .getSubject();
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+            return e.getClaims().getSubject();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return Jwts
                 .parserBuilder()
                 .setSigningKey(secretKey)

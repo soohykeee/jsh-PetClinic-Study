@@ -5,6 +5,7 @@ import kr.co.jshpetclinicstudy.infra.model.ResponseFormat;
 import kr.co.jshpetclinicstudy.infra.model.ResponseStatus;
 import kr.co.jshpetclinicstudy.service.MemberService;
 import kr.co.jshpetclinicstudy.service.model.request.MemberRequestDto;
+import kr.co.jshpetclinicstudy.service.model.request.TokenDto;
 import kr.co.jshpetclinicstudy.service.model.response.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -78,6 +79,17 @@ public class MemberController {
     @PostMapping("/admin/search")
     public ResponseFormat<List<MemberResponseDto.READ>> getMembersByCondition(@RequestBody @Valid MemberRequestDto.CONDITION condition) {
         return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.getMembersByCondition(condition));
+    }
+
+    /**
+     * Refresh
+     *
+     * @param tokenDto
+     * @return
+     */
+    @GetMapping("/refresh")
+    public ResponseFormat<TokenDto> refresh(@RequestBody @Valid TokenDto tokenDto) {
+        return ResponseFormat.successWithData(ResponseStatus.SUCCESS_OK, memberService.refreshAccessToken(tokenDto));
     }
 
 }
