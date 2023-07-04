@@ -2,7 +2,6 @@ package kr.co.jshpetclinicstudy.service;
 
 
 import jakarta.transaction.Transactional;
-import kr.co.jshpetclinicstudy.infra.exception.BusinessLogicException;
 import kr.co.jshpetclinicstudy.infra.exception.DuplicatedException;
 import kr.co.jshpetclinicstudy.infra.exception.InvalidRequestException;
 import kr.co.jshpetclinicstudy.infra.exception.NotFoundException;
